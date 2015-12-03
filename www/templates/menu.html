@@ -1,0 +1,47 @@
+<ion-side-menus enable-menu-with-back-views="false">
+  <ion-side-menu-content drag-content="false"> //diretiva que desabilita o deslize para exibir o menu
+    <ion-nav-bar class="bar bar-header">
+      <ion-nav-back-button>
+      </ion-nav-back-button>
+
+      <!-- Parte comentada para esconder o hamburguer icon
+      <ion-nav-buttons side="right">
+        <button class="button button-icon button-clear ion-navicon" menu-toggle="right">
+        </button>
+      </ion-nav-buttons>
+    -->
+    </ion-nav-bar>
+    <ion-nav-view name="menuContent"></ion-nav-view>
+  </ion-side-menu-content>
+
+  <ion-side-menu side="right">
+    <ion-header-bar class="bar bar-header bar-calm">
+      <h1 class="title">Left</h1>
+    </ion-header-bar>
+    <ion-content>
+      <ion-list>
+        <ion-item menu-close ng-click="login()">
+          Home
+        </ion-item>
+        <ion-item menu-close href="#/app/lista_filmes">
+          Filmes
+        </ion-item>
+        <ion-item menu-close href="#/app/browse">
+          Agenda
+        </ion-item>
+        <ion-item menu-close href="#/app/playlists">
+          Musica
+        </ion-item>
+        <ion-item menu-close href="#">
+          Gastronomia
+        </ion-item>
+        <ion-item menu-close href="#">
+          Votação
+        </ion-item>
+        <ion-item menu-close href="#">
+          Como chegar
+        </ion-item>
+      </ion-list>
+    </ion-content>
+  </ion-side-menu>
+</ion-side-menus>
