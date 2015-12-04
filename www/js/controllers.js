@@ -10,7 +10,6 @@ angular.module('starter.controllers', [])
   //});
 
   // Form data for the login modal
-  $scope.loginData = {};
 
   // Create the login modal that we will use later
   $ionicModal.fromTemplateUrl('templates/login.html', {
@@ -40,6 +39,20 @@ angular.module('starter.controllers', [])
     }, 1000);
   };
 })
+
+facebookApp.controller ("LoginController",function ($scope ,$cordovaOauth, $localStorage, $location)  {
+
+     $scope.login = function ()   {
+         $cordovaOauth.facebook ("CLIENT_ID_HERE",  ["email", "read_stream", "user_website","user_location","user_relationships"]).then (function(result) {
+             $localStorage.accessToken = result.access_token;
+             $location.path ("/profile") ;
+         } ,  function (error)  {
+             alert ( "There was a problem signing in!  See the console for logs" ) ;
+             console.log(error);
+         });
+     };
+
+ })
 
 .controller('PlaylistsCtrl', function($scope) {
   $scope.playlists = [
