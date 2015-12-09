@@ -1,3 +1,27 @@
 body {
   cursor: url('http://ionicframework.com/img/finger.png'), auto;
-}/* Empty. Add your own CSS if you like */
+}
+.padding_30px {
+  padding:50px;
+  text-align:center;
+}
+.large_button {
+  line-height: 5vh !important;
+    width: 40%;
+  }
+.small_button{
+    line-height: 5px !important;
+    min-height: 24px !important;
+    font-size: 12px;
+}
+.icon_custom {
+  font-size:40px;
+  padding:10px;
+}
+.img_center {
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+  width: 200px ;
+  height: 200px ;
+}

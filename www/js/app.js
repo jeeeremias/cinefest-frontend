@@ -4,7 +4,7 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
-var app = angular.module('starter', ['ionic', 'starter.controllers', 'ngCordova'])
+var app = angular.module('starter', ['ionic', 'starter.controllers','services'])
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
@@ -28,13 +28,21 @@ var app = angular.module('starter', ['ionic', 'starter.controllers', 'ngCordova'
     url: '/app',
     abstract: true,
     templateUrl: 'templates/menu.html',
-    controller: 'AppCtrl'
   })
+
   .state('app.login', {
     url: '/login',
     views: {
       'menuContent': {
         templateUrl: 'templates/login.html'
+      }
+    }
+  })
+  .state('app.cadastro', {
+    url: '/cadastro',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/cadastro.html'
       }
     }
   })
@@ -77,28 +85,4 @@ var app = angular.module('starter', ['ionic', 'starter.controllers', 'ngCordova'
   });
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/app/login');
-});
-
-window.fbAsyncInit = function() {
-    FB.init({
-      appId      : 'your-app-id',
-      xfbml      : true,
-      version    : 'v2.5'
-    });
-  };
-
-  (function(d, s, id){
-     var js, fjs = d.getElementsByTagName(s)[0];
-     if (d.getElementById(id)) {return;}
-     js = d.createElement(s); js.id = id;
-     js.src = "//connect.facebook.net/en_US/sdk.js";
-     fjs.parentNode.insertBefore(js, fjs);
-   }(document, 'script', 'facebook-jssdk'));
-
-app.controller('movieCtrl', function($scope, $http) {
-
-  $http.get("https://cinefest2016.herokuapp.com/filmes?limit=10&offset=0")
-    .success(function(data) {
-      $scope.lista = data;
-    });
 });

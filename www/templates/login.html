@@ -1,11 +1,35 @@
-<ion-view  title = "Facebook Example" >
-     <ion-content>
-         <div  class = "padding" >
-             <button  ng-click = "login()"   class = "button button-block button-balanced" > Oauth Sign In </button>
-             <p>
-                 Clicking the above button will initiate an official browser sign in flow with Facebook.  You
-                 will be redirected to the Facebook website to enter your credentials.
-             </p>
+<ion-view>
+     <ion-content ng-controller="WelcomeCtrl">
+       <img src="img/logo.jpg" class="img_center">
+         <div  class = "list list-inset" >
+            <label class="item item-input">
+              <input type="text" placeholder="Usuario">
+            </label>
+            <label class="item item-input">
+              <input type="text" placeholder="Senha">
+            </label>
          </div>
+         <div class="row">
+           <div class="col">
+         <button class="button button-positive button-block" ng-click="facebookSignIn()">
+           facebook
+           </button>
+           </div>
+         <div class="col">
+       <button class="button button-light button-block">
+         Login
+         </button>
+         </div>
+       </div>
+       <div class="row">
+         <div class="row">
+  <div class="col col-30"></div>
+  <div class="col col-20"></div>
+  <div class="col "><a href="#/app/cadastro">
+    <button class="button button-clear button-positive small_button" >
+  Faça seu cadastro
+    </button></a>
+  </div>
+</div>
      </ion-content>
- </ion-view> 
+ </ion-view>
