@@ -1,16 +1,18 @@
-<ion-view view-title="Cadastro">
-  <ion-content>
+<ion-view view-title="Cadastro" ng-app="validationApp">
+  <ion-content ng-controller="RegisterCtrl">
+    <form>
     <div class="list list-inset">
       <label class="item item-input">
-        <input type="text" placeholder="Nome">
+        <input type="text" placeholder="Nome" ng-model="data.username">
       </label>
       <label class="item item-input">
-        <input type="text" placeholder="Email">
+        <input type="email" placeholder="Email" ng-model="data.email">
       </label>
       <label class="item item-input">
-        <input type="text" placeholder="senha">
+        <input type="password" placeholder="senha" ng-model="data.senha">
       </label>
-      <button class="button button-block button-light">Ok</button>
+      <button class="button button-block button-light" ng-click="submit()">Ok</button>
     </div>
+  </form>
   </ion-content>
 </ion-view>

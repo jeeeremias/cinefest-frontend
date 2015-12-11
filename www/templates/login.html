@@ -1,12 +1,12 @@
 <ion-view>
-     <ion-content ng-controller="WelcomeCtrl">
+     <ion-content ng-controller="LoginCtrl">
        <img src="img/logo.jpg" class="img_center">
          <div  class = "list list-inset" >
             <label class="item item-input">
-              <input type="text" placeholder="Usuario">
+              <input type="text" placeholder="Usuario" ng-model="data.username">
             </label>
             <label class="item item-input">
-              <input type="text" placeholder="Senha">
+              <input type="password" placeholder="Senha" ng-model="data.password">
             </label>
          </div>
          <div class="row">
@@ -16,7 +16,7 @@
            </button>
            </div>
          <div class="col">
-       <button class="button button-light button-block">
+       <button class="button button-light button-block" ng-click="submit()">
          Login
          </button>
          </div>
