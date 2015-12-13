@@ -1,8 +1,9 @@
 var app = angular.module('starter.controllers', [])
 
-app.controller('movieCtrl', function($scope, $http, Filmes, Imagem) {
+app.controller('movieCtrl', function($scope, $http, $ionicLoading, Filmes, Imagem) {
   console.log('baixando filmes');
   $scope.lista = Filmes.query();
+
 });
 
 app.controller('LoginCtrl', function($scope, $http, $state, $q, $ionicLoading, $ionicPopup) {
@@ -20,7 +21,7 @@ app.controller('LoginCtrl', function($scope, $http, $state, $q, $ionicLoading, $
           if ($scope.response){//Verificar a resposta do service
             $state.go('app.lista_filmes'); //Método que redireciona o usuario para a pagina de lista de filmes
           }else {
-            
+
           }
 
       });
