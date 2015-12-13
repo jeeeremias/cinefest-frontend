@@ -1,19 +1,15 @@
-angular.module('services', [])
+var filmeServices = angular.module('filmeServices', ['ngResource']);
 
-.service('UserService', function() {
+filmeServices.factory('Filmes', ['$resource',
+  function($resource){
+    return $resource('http://rest-cinefest.rhcloud.com/filmes', {pag:'0', tam:'100'}, {
+      'query':  {method:'GET', isArray:true}
+    });
+  }]);
 
-//for the purpose of this example I will store user data on ionic local storage but you should save it on a database
-
-  var setUser = function(user_data) {
-    window.localStorage.starter_facebook_user = JSON.stringify(user_data);
-  };
-
-  var getUser = function(){
-    return JSON.parse(window.localStorage.starter_facebook_user || '{}');
-  };
-
-  return {
-    getUser: getUser,
-    setUser: setUser
-  };
-});
+filmeServices.factory('Imagem', ['$resource',
+  function($resource){
+    return $resource('http://rest-cinefest.rhcloud.com/imagem', {id:''}, {
+      'query':  {method:'GET', isArray:false}
+    });
+  }]);

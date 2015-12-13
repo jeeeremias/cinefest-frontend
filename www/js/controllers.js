@@ -1,27 +1,11 @@
 var app = angular.module('starter.controllers', [])
 
-app.controller('PlaylistsCtrl', function($scope) {
-  $scope.playlists = [
-    { title: 'Reggae', id: 1 },
-    { title: 'Chill', id: 2 },
-    { title: 'Dubstep', id: 3 },
-    { title: 'Indie', id: 4 },
-    { title: 'Rap', id: 5 },
-    { title: 'Cowbell', id: 6 }
-  ];
-})
-
-app.controller('PlaylistCtrl', function($scope, $stateParams) {
-})
-
-app.controller('movieCtrl', function($scope, $http) {
+app.controller('movieCtrl', function($scope, $http, Filmes, Imagem) {
   console.log('baixando filmes');
-  $http.get("https://cinefest2016.herokuapp.com/filmes?limit=10&offset=0")
-    .success(function(data) {
-      $scope.lista = data;
-    });
-})
-app.controller('LoginCtrl', function($scope, $http, $state, $q, UserService, $ionicLoading, $ionicPopup) {
+  $scope.lista = Filmes.query();
+});
+
+app.controller('LoginCtrl', function($scope, $http, $state, $q, $ionicLoading, $ionicPopup) {
 
   $scope.data = {};
 
