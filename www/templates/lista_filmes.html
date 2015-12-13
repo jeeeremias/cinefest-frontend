@@ -3,10 +3,12 @@
         <div class="list">
           <a ng-repeat="filme in lista track by $index"
           <a class="item item-thumbnail-left" href="#">
-            <img ng-src="https://cinefest2016.herokuapp.com/imagem?id={{$index}}">
+            <img ng-src="http://rest-cinefest.rhcloud.com/imagem?id={{filme.imagens[0].resource}}">
             <h2><b>{{filme.nome}}</b></h2>
           <h2><p><b>{{filme.autor}}</h2></b></p>
+          <div class="item-text-wrap">
             <p>{{filme.descricao}}</p>
+            </div>
           </a>
           </a>
         </div>
