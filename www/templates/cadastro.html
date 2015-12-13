@@ -1,17 +1,19 @@
 <ion-view view-title="Cadastro" ng-app="validationApp">
   <ion-content ng-controller="RegisterCtrl">
-    <form>
+    <form name="mainForm" ng-submit="send()" novalidate>
     <div class="list list-inset">
       <label class="item item-input">
-        <input type="text" placeholder="Nome" ng-model="data.username">
+        <input type="text" name="name" placeholder="Nome" ng-model="data.username" required>
+        <span style="color:red" ng-class="error" ng-show="mainForm.name.$invalid && mainForm.name.$dirty">* Nome obrigatório</span>
       </label>
       <label class="item item-input">
-        <input type="email" placeholder="Email" ng-model="data.email">
+        <input type="email" name="email" placeholder="Email" ng-model="data.email" required>
+        <span style="color:red" ng-class="error" ng-show="mainForm.email.$invalid && !mainForm.email.$pristine">* Formato do e-mail inválido</span>
       </label>
       <label class="item item-input">
-        <input type="password" placeholder="senha" ng-model="data.senha">
+        <input type="password" name="password" placeholder="senha" ng-model="data.senha" required>
       </label>
-      <button class="button button-block button-light" ng-click="submit()">Ok</button>
+      <button class="button button-block button-light" ng-click="submit()" ng-disabled="mainForm.$invalid">Ok</button>
     </div>
   </form>
   </ion-content>
