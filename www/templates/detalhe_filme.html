@@ -1,0 +1,10 @@
+<ion-view view-title="Playlist">
+  <ion-content ng-controller="movieCtrl">
+    <div class="list">
+      <a ng-repeat="filme in bosta track by $index">
+        <h2>{{filme.nome}}</h2>
+        <p>{{filme.descricao}}</p>
+      </a>
+    </div>
+  </ion-content>
+</ion-view>

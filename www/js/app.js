@@ -64,22 +64,22 @@ var app = angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers'
         }
       }
     })
-    .state('app.playlists', {
-      url: '/playlists',
+    .state('app.detalhe_filme', {
+      url: '/detalhe_filme',
       views: {
         'menuContent': {
-          templateUrl: 'templates/playlists.html',
-          controller: 'PlaylistsCtrl'
+          templateUrl: 'templates/detalhe_filme.html',
+
         }
       }
     })
 
   .state('app.single', {
-    url: '/playlists/:playlistId',
+    url: '/lista/:listaId',
     views: {
       'menuContent': {
-        templateUrl: 'templates/playlist.html',
-        controller: 'PlaylistCtrl'
+        templateUrl: 'templates/lista.html',
+        controller: 'playlistsCtrl'
       }
     }
   });

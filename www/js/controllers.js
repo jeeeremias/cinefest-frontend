@@ -1,9 +1,16 @@
 var app = angular.module('starter.controllers', [])
 
-app.controller('movieCtrl', function($scope, $http, $ionicLoading, Filmes, Imagem) {
+app.controller('movieCtrl', function($scope, $http, $ionicLoading, Filmes, Imagem, sharedProperties) {
   console.log('baixando filmes');
   $scope.lista = Filmes.query();
 
+  $scope.nome = function (nome, descricao) {
+    sharedProperties.addText(nome, descricao);
+    console.log(nome, descricao);
+
+  };
+
+  $scope.bosta = sharedProperties.getNome();
 });
 
 app.controller('LoginCtrl', function($scope, $http, $state, $q, $ionicLoading, $ionicPopup) {
@@ -11,6 +18,8 @@ app.controller('LoginCtrl', function($scope, $http, $state, $q, $ionicLoading, $
   $scope.data = {};
 
   $scope.submit = function(){
+    $state.go('app.lista_filmes'); //Método que redireciona o usuario para a pagina de lista de filmes
+    /*
     console.log("user: " + $scope.data.username + " - PW: " + $scope.data.password);
       var link = 'http://nikola-breznjak.com/_testings/ionicPHP/api.php';
 
@@ -19,12 +28,14 @@ app.controller('LoginCtrl', function($scope, $http, $state, $q, $ionicLoading, $
           console.log("response:" +$scope.response);
           alert("response: "  +$scope.response);
           if ($scope.response){//Verificar a resposta do service
-            $state.go('app.lista_filmes'); //Método que redireciona o usuario para a pagina de lista de filmes
+
           }else {
 
           }
 
       });
+
+      */
 
   }
 
