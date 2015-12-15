@@ -7,7 +7,7 @@ app.controller('movieCtrl', function($scope, $http, $ionicLoading, Filmes, Image
   $scope.noMoreItemsAvailable = false;
   $scope.loadMore = function() {
     $http({
-      url: 'http://rest-cinefest.rhcloud.com/filmes', 
+      url: 'http://rest-cinefest.rhcloud.com/filmes',
       method: "GET",
       params: $scope.requestListFilmes
     }).then(function(result) {
@@ -23,9 +23,9 @@ app.controller('movieCtrl', function($scope, $http, $ionicLoading, Filmes, Image
     });
   };
 
-  $scope.nome = function (nome, descricao) {
-    sharedProperties.addText(nome, descricao);
-    console.log(nome, descricao);
+  $scope.nome = function (nome, autor, descricao) {
+    sharedProperties.addText(nome, autor, descricao);
+    console.log(nome, autor, descricao);
 
   };
 

@@ -25,8 +25,14 @@ body {
   width: 200px ;
   height: 200px ;
 }
+.img_detalhes_filme {
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+  width: 100px ;
+  height: 100px ;
+}
 .facebook-sign-in {
-  border-radius: 4px;
   font-weight: 500;
   color: #FFF;
   background-color: #3b5998;

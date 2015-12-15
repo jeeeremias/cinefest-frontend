@@ -22,9 +22,9 @@ filmeServices.factory('Imagem', ['$resource',
 
   filmeServices.service('sharedProperties', function () {
             var property = [];
-            var addText = function(nome, descricao){
+            var addText = function(nome, autor, descricao){
               property.splice(0);
-              property.push({nome:nome, descricao:descricao});
+              property.push({nome:nome, autor:autor, descricao:descricao});
             };
 
             var getNome = function(){
