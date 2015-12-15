@@ -2,8 +2,14 @@ var filmeServices = angular.module('filmeServices', ['ngResource']);
 
 filmeServices.factory('Filmes', ['$resource',
   function($resource){
-    return $resource('http://rest-cinefest.rhcloud.com/filmes', {pag:'0', tam:'100'}, {
-      'query':  {method:'GET', isArray:true}
+    return $resource('http://rest-cinefest.rhcloud.com/filmes', {pag:'@pag', tam:'@tam'}, {
+      'query':  {
+        method:'GET',
+        isArray:true,
+        transformResponse: function(data) {
+          return angular.fromJson(data);
+        }
+      }
     });
   }]);
 

@@ -55,15 +55,6 @@ var app = angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers'
       }
     }
   })
-
-  .state('app.browse', {
-      url: '/browse',
-      views: {
-        'menuContent': {
-          templateUrl: 'templates/browse.html'
-        }
-      }
-    })
     .state('app.detalhe_filme', {
       url: '/detalhe_filme',
       views: {
@@ -73,16 +64,6 @@ var app = angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers'
         }
       }
     })
-
-  .state('app.single', {
-    url: '/lista/:listaId',
-    views: {
-      'menuContent': {
-        templateUrl: 'templates/lista.html',
-        controller: 'playlistsCtrl'
-      }
-    }
-  });
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/app/login');
 });

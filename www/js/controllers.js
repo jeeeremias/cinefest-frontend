@@ -2,7 +2,26 @@ var app = angular.module('starter.controllers', [])
 
 app.controller('movieCtrl', function($scope, $http, $ionicLoading, Filmes, Imagem, sharedProperties) {
   console.log('baixando filmes');
-  $scope.lista = Filmes.query();
+  $scope.requestListFilmes = {pag:0, tam:3}
+  $scope.lista = [];
+  $scope.noMoreItemsAvailable = false;
+  $scope.loadMore = function() {
+    $http({
+      url: 'http://rest-cinefest.rhcloud.com/filmes', 
+      method: "GET",
+      params: $scope.requestListFilmes
+    }).then(function(result) {
+      if (result.data.length == 0) {
+        $scope.noMoreItemsAvailable = true;
+      }
+      for (var i in result.data) {
+        $scope.lista.push(result.data[i]);
+      }
+      console.log($scope.lista);
+      $scope.$broadcast('scroll.infiniteScrollComplete');
+      $scope.requestListFilmes.pag ++;
+    });
+  };
 
   $scope.nome = function (nome, descricao) {
     sharedProperties.addText(nome, descricao);
