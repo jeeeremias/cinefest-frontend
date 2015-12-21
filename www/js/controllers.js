@@ -29,10 +29,10 @@ app.controller('movieCtrl', function($scope, $http, $ionicLoading, Filmes, Image
 
   };
 
-  $scope.bosta = sharedProperties.getNome();
+  $scope.detalhes = sharedProperties.getNome();
 });
 
-app.controller('LoginCtrl', function($scope, $http, $state, $q, $ionicLoading, $ionicPopup) {
+app.controller('LoginCtrl', function($scope, $http, $state, $q, $ionicLoading, $ionicPopup, UserService) {
 
   $scope.data = {};
 
@@ -113,7 +113,7 @@ app.controller('LoginCtrl', function($scope, $http, $state, $q, $ionicLoading, $
 
   //This method is executed when the user press the "Login with facebook" button
   $scope.facebookSignIn = function() {
-    console.log('login');
+    console.log('botaosauhsa');
     facebookConnectPlugin.getLoginStatus(function(success){
      if(success.status === 'connected'){
         // the user is logged in and has authenticated your app, and response.authResponse supplies
@@ -136,17 +136,16 @@ app.controller('LoginCtrl', function($scope, $http, $state, $q, $ionicLoading, $
 							name: profileInfo.name,
 							email: profileInfo.email,
 							picture : "http://graph.facebook.com/" + success.authResponse.userID + "/picture?type=large"
-
 						});
 
-						$state.go('app.lista_filmes');
+						$state.go('app.home');
 
 					}, function(fail){
 						//fail get profile info
 						console.log('profile info fail', fail);
 					});
 				}else{
-					$state.go('app.lista_filmes');
+					$state.go('app.home');
 				}
 
      } else {
@@ -159,7 +158,7 @@ app.controller('LoginCtrl', function($scope, $http, $state, $q, $ionicLoading, $
         });
 
         //ask the permissions you need. You can learn more about FB permissions here: https://developers.facebook.com/docs/facebook-login/permissions/v2.4
-        facebookConnectPlugin.login(['email', 'public_profile'], fbLoginSuccess, fbLoginError);
+        facebookConnectPlugin.login(["public_profile", "email", "user_friends"], fbLoginSuccess, fbLoginError);
       }
     });
   };
@@ -178,4 +177,4 @@ app.controller('LoginCtrl', function($scope, $http, $state, $q, $ionicLoading, $
             alert("response: "  +$scope.response);
         });
     };
-})
+});

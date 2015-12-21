@@ -1,17 +1,24 @@
 <ion-view view-title="Sobre o filme">
   <ion-content ng-controller="movieCtrl">
-    <div class="list">
       <img src="img/filme.jpg" class="img_detalhes_filme">
-      <a ng-repeat="filme in bosta track by $index">
+      <a ng-repeat="filme in detalhes track by $index">
         <div class="row">
-          <div class="col col-50">
+          <div class="col">
             <b>{{filme.nome}}</b>
-            <b><button class="button facebook-sign-in button-small" href="#">{{filme.autor}}</button></b>
-          </div>
-          {{filme.descricao}}
-        </a>
-      </a>
+        </div>
     </div>
+    <div class="row">
+      <div class="col col">
+        <b><button class="button facebook-sign-in button-small" href="#">{{filme.autor}}</button></b>
+      </div>
+      <div class="col col"><div id="text_data">23/02 - 19:40</div></div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <div class="item item-text-wrap">
+        <p>{{filme.descricao}}</p>
+      </div>
+      </div>
     </div>
   </ion-content>
 </ion-view>
