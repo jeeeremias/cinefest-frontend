@@ -1,20 +1,21 @@
-<ion-view view-title="Cadastro" ng-app="validationApp">
+<ion-view view-title="Cadastro">
   <ion-content ng-controller="RegisterCtrl">
-    <form name="mainForm" ng-submit="send()" novalidate>
+    <form name="mainForm" ng-submit="mainForm.submit()" novalidate>
     <div class="list list-inset">
       <label class="item item-input">
-        <input type="text" name="name" placeholder="Nome" ng-model="user.username" required>
+        <input type="text" name="name" placeholder="*Nome" ng-model="user.username" required>
         <span style="color:red" ng-class="error" ng-show="mainForm.name.$invalid && mainForm.name.$dirty">* Nome obrigatório</span>
       </label>
       <label class="item item-input">
-        <input type="email" name="email" placeholder="Email" ng-model="user.email" required>
-        <span style="color:red" ng-class="error" ng-show="mainForm.email.$invalid && !mainForm.email.$pristine">* Formato do e-mail inválido</span>
+        <input type="email" name="email" placeholder="*Email" ng-model="user.email" required>
+        <span style="color:red" ng-class="error" ng-show="mainForm.email.$invalid && !mainForm.email.$pristine">* Digite um e-mail válido</span>
       </label>
       <label class="item item-input">
-        <input type="password" name="password" placeholder="senha" ng-model="user.senha" required>
+        <input type="password" name="password" placeholder="*Senha" ng-model="user.senha" required>
       </label>
       <label class="item item-input">
-        <input type="password" name="confirmPass" placeholder="Confirme a senha" ng-model="user.confirmPass" required>
+        <input type="password" name="confirmpass" placeholder="*Confirme a senha" ng-model="user.confirmpass" required compare-to="user.senha">
+        <span style="color:red" ng-class="error" ng-show="mainForm.confirmpass.$invalid && mainForm.confirmpass.$dirty">* Senhas não conferem</span>
         </label>
       <button class="button button-block button-light" ng-click="submit()" ng-disabled="mainForm.$invalid">Ok</button>
     </div>
