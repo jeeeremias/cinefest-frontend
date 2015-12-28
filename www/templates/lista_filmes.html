@@ -1,5 +1,5 @@
 <ion-view view-title="Filmes">
-  <ion-content ng-controller="movieCtrl">
+  <ion-content ng-controller="filmeCtrl">
     <ion-list>
       <ion-item class="item item-thumbnail-left" ng-repeat="filme in lista track by $index" href="#/app/detalhe_filme" ng-click="nome(filme.nome, filme.autor, filme.descricao)">
         <img ng-src="http://rest-cinefest.rhcloud.com/imagem?id={{filme.imagens[0].resource}}">

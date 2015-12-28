@@ -1,13 +1,14 @@
-  var app = angular.module('starter.controllers', [])
+  var app = angular.module('cinefestApp.controllers', [])
+  var endpoint = 'http://rest-cinefest.rhcloud.com';
 
-  app.controller('movieCtrl', function($scope, $http, $ionicLoading, Filmes, Imagem, sharedProperties) {
+  app.controller('filmeCtrl', function($scope, $http, $ionicLoading, Filmes, Imagem, sharedProperties) {
     console.log('baixando filmes');
-    $scope.requestListFilmes = {pag:0, tam:3}
+    $scope.requestListFilmes = {pag:0, tam:5}
     $scope.lista = [];
     $scope.noMoreItemsAvailable = false;
     $scope.loadMore = function() {
       $http({
-        url: 'http://rest-cinefest.rhcloud.com/filmes',
+        url: endpoint + '/filmes',
         method: "GET",
         params: $scope.requestListFilmes
       }).then(function(result) {
@@ -32,30 +33,34 @@
     $scope.detalhes = sharedProperties.getNome();
   });
 
-  app.controller('LoginCtrl', function($scope, $http, $state, $q, $ionicLoading, $ionicPopup, UserService) {
+  app.controller('MenuCtrl', function($scope, $http, $state, $q, $ionicLoading, $ionicPopup, $ionicNavBarDelegate, UserService) {
+    $scope.go = function(pagina) {
+      $state.go(pagina);
+    }
+  });
 
-    $scope.data = {};
+  app.controller('LoginCtrl', function($scope, $http, $state, $q, $ionicLoading, $ionicPopup, $ionicNavBarDelegate, UserService) {
+    $ionicNavBarDelegate.showBar(false);
 
-    $scope.submit = function(){
-      $state.go('app.lista_filmes'); //Método que redireciona o usuario para a pagina de lista de filmes
-      /*
-      console.log("user: " + $scope.data.username + " - PW: " + $scope.data.password);
-        var link = 'http://nikola-breznjak.com/_testings/ionicPHP/api.php';
+    $scope.usuario = JSON.parse(window.localStorage['usuario'] || '{}');
 
-        $http.post(link, {username : $scope.data.username}).then(function (res){
-            $scope.response = res.data;
-            console.log("response:" +$scope.response);
-            alert("response: "  +$scope.response);
-            if ($scope.response){//Verificar a resposta do service
+    $scope.submit = function() {
+       $http({
+        url: endpoint + '/login',
+        method: "POST",
+        data: $scope.usuario
+      }).then(function(result) {
+        if (result.data.sucesso) {
+          window.localStorage['usuario'] = JSON.stringify($scope.usuario);
+          $state.go('menu');
+        } else {
+          console.log(result.data.mensagem);
+        }
+      });
+    }
 
-            }else {
-
-            }
-
-        });
-
-        */
-
+    if ($scope.usuario.email != undefined && $scope.usuario.senha != undefined) {
+      $scope.submit();
     }
 
     //This is the success callback from the login method
@@ -164,19 +169,24 @@
     };
   })
 
-  .controller('RegisterCtrl', function($scope, $http) {
-      $scope.data = {};
+  .controller('RegisterCtrl', function($scope, $http, $state) {
 
-      $scope.submit = function(){
-        console.log("user: " + $scope.data.username + " - PW: " + $scope.data.password);
-          var link = 'http://nikola-breznjak.com/_testings/ionicPHP/api.php';
+    $scope.usuario = {};
 
-          $http.post(link, {username : $scope.data.username}).then(function (res){
-              $scope.response = res.data;
-              console.log("response:" +$scope.response);
-              alert("response: "  +$scope.response);
-          });
-        };
+    $scope.submitCadastro = function() {
+      $http({
+        url: endpoint + '/cadastro',
+        method: "POST",
+        data: $scope.usuario
+      }).then(function(result) {
+        if (result.data.sucesso) {
+          console.log(result.data.mensagem);
+          $state.go('app.login');
+        } else {
+          console.log(result.data.mensagem);
+        }
+      });
+    }
   })
     var compareTo = function()
     {

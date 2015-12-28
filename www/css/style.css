@@ -51,3 +51,11 @@ body {
 #text_data {
   margin-left: 2cm;
 }
+.img_menu {
+    width: 50%;
+}
+.img_grid_content {
+    position: absolute;
+    height: 80%;
+    width: 80%;
+}

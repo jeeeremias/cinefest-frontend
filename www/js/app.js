@@ -1,10 +1,10 @@
 // Ionic Starter App
 
 // angular.module is a global place for creating, registering and retrieving Angular modules
-// 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
+// 'cinefestApp' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
-// 'starter.controllers' is found in controllers.js
-var app = angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers','filmeServices'])
+// 'cinefestApp.controllers' is found in controllers.js
+var app = angular.module('cinefestApp', ['ionic', 'ngCordova', 'cinefestApp.controllers','filmeServices'])
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
@@ -24,46 +24,30 @@ var app = angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers'
 .config(function($stateProvider, $urlRouterProvider) {
   $stateProvider
 
-    .state('app', {
-    url: '/app',
-    abstract: true,
-    templateUrl: 'templates/menu.html',
+  .state('login', {
+    url: '/',
+    templateUrl: 'templates/login.html'
   })
 
-  .state('app.login', {
-    url: '/login',
-    views: {
-      'menuContent': {
-        templateUrl: 'templates/login.html'
-      }
-    }
+  .state('menu', {
+    url: '/menu',
+    templateUrl: 'templates/menu.html'
   })
-  .state('app.cadastro', {
+
+  .state('cadastro', {
     url: '/cadastro',
-    views: {
-      'menuContent': {
-        templateUrl: 'templates/cadastro.html'
-      }
-    }
+    templateUrl: 'templates/cadastro.html'
   })
 
-  .state('app.lista_filmes', {
+  .state('lista_filmes', {
     url: '/lista_filmes',
-    views: {
-      'menuContent': {
-        templateUrl: 'templates/lista_filmes.html'
-      }
-    }
+      templateUrl: 'templates/lista_filmes.html'
   })
-    .state('app.detalhe_filme', {
-      url: '/detalhe_filme',
-      views: {
-        'menuContent': {
-          templateUrl: 'templates/detalhe_filme.html',
 
-        }
-      }
-    })
+  .state('app.detalhe_filme', {
+    url: '/detalhe_filme',
+    templateUrl: 'templates/detalhe_filme.html',
+  })
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/app/login');
+  $urlRouterProvider.otherwise('/');
 });

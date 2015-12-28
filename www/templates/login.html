@@ -1,31 +1,31 @@
-<ion-view view-title="">
+<ion-view view-title="Login" hide-back-button="true">
      <ion-content ng-controller="LoginCtrl" padding="true">
        <img src="img/logo.jpg" class="img_center">
-         <div  class = "list list-inset">
+          <div  class = "list list-inset">
             <label class="item item-input">
-              <input type="text" placeholder="Usuario" ng-model="data.username">
+              <input type="email" placeholder="Email" ng-model="usuario.email">
             </label>
             <label class="item item-input">
-              <input type="password" placeholder="Senha" ng-model="data.password">
+              <input type="password" placeholder="Senha" ng-model="usuario.senha">
             </label>
-         </div>
-         <div class="row">
-           <div class="col">
-         <button class="button facebook-sign-in icon button-block " ng-click="facebookSignIn()">
-           Facebook
+          </div>
+          <div class="row">
+            <div class="col">
+          <button class="button facebook-sign-in icon button-block " ng-click="facebookSignIn()">
+            Facebook
+            </button>
+            </div>
+          <div class="col">
+          <button class="button button-light button-block" ng-click="submit()" type="submit">
+           Login
            </button>
            </div>
-         <div class="col">
-       <button class="button button-light button-block" ng-click="submit()">
-         Login
-         </button>
          </div>
-       </div>
        <div class="row">
-         <div class="row">
-  <div class="col col-30"></div>
-  <div class="col col-20"></div>
-  <div class="col "><a href="#/app/cadastro">
+       <div class="row">
+    <div class="col col-30"></div>
+    <div class="col col-20"></div>
+    <div class="col "><a href="#/cadastro">
     <button class="button button-clear button-positive small_button" >
   Faça seu cadastro
     </button></a>
