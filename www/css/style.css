@@ -46,7 +46,7 @@ body {
   border-color: #27447e;
 }
 .span {
-  color: rgb(0,0,255);
+  padding: 10px;
 }
 #text_data {
   margin-left: 2cm;

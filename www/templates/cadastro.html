@@ -4,18 +4,18 @@
     <div class="list list-inset">
       <label class="item item-input">
         <input type="text" name="name" placeholder="*Nome" ng-model="usuario.nome" required>
-        <span style="color:red" ng-class="error" ng-show="mainForm.name.$invalid && mainForm.name.$dirty">* Nome obrigatório</span>
+        <span style="color:red" ng-class="error" ng-show="mainForm.name.$invalid && mainForm.name.$dirty"><div class="span">*Nome obrigatório </div></span>
       </label>
       <label class="item item-input">
         <input type="email" name="email" placeholder="*Email" ng-model="usuario.email" required>
-        <span style="color:red" ng-class="error" ng-show="mainForm.email.$invalid && !mainForm.email.$pristine">* Digite um e-mail válido</span>
+        <span style="color:red" ng-class="error" ng-show="mainForm.email.$invalid && !mainForm.email.$pristine"><div class="span">*Digite um e-mail válido </div></span>
       </label>
       <label class="item item-input">
         <input type="password" name="password" placeholder="*Senha" ng-model="usuario.senha" required>
       </label>
       <label class="item item-input">
         <input type="password" name="confirmpass" placeholder="*Confirme a senha" ng-model="usuario.confirmpass" required compare-to="usuario.senha">
-        <span style="color:red" ng-class="error" ng-show="mainForm.confirmpass.$invalid && mainForm.confirmpass.$dirty">* Senhas não conferem</span>
+        <span style="color:red" ng-class="error" ng-show="mainForm.confirmpass.$invalid && mainForm.confirmpass.$dirty"><div class="span"> *Senhas não conferem</div></span>
         </label>
       <button class="button button-block button-light" ng-click="submitCadastro()" ng-disabled="mainForm.$invalid">Ok</button>
     </div>
