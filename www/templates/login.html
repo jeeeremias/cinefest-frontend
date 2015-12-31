@@ -9,6 +9,7 @@
               <input type="password" placeholder="Senha" ng-model="usuario.senha">
             </label>
           </div>
+          <div class="text_response" ng-if="showmessage">*{{mensagem}}</div>
           <div class="row">
             <div class="col">
           <button class="button facebook-sign-in icon button-block " ng-click="facebookSignIn()">

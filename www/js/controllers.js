@@ -39,22 +39,25 @@
     }
   });
 
-  app.controller('LoginCtrl', function($scope, $http, $state, $q, $ionicLoading, $ionicPopup, $ionicNavBarDelegate, UserService) {
+  app.controller('LoginCtrl', function($scope, $http, $state, $cordovaDialogs, $q, $ionicLoading, $ionicPopup, $ionicNavBarDelegate, UserService) {
     $ionicNavBarDelegate.showBar(false);
-
+    $scope.showmessage = false;
     $scope.usuario = JSON.parse(window.localStorage['usuario'] || '{}');
-
     $scope.submit = function() {
        $http({
         url: endpoint + '/login',
         method: "POST",
         data: $scope.usuario
       }).then(function(result) {
+
         if (result.data.sucesso) {
+          $showmessage = false;
           window.localStorage['usuario'] = JSON.stringify($scope.usuario);
           $state.go('menu');
         } else {
+          $scope.showmessage = true;
           console.log(result.data.mensagem);
+          $scope.mensagem = result.data.mensagem;
         }
       });
     }
@@ -84,7 +87,7 @@
         });
 
         $ionicLoading.hide();
-        $state.go('app.lista_filmes');
+        $state.go('lista_filmes');
 
       }, function(fail){
         //fail get profile info
@@ -143,14 +146,14 @@
   							picture : "http://graph.facebook.com/" + success.authResponse.userID + "/picture?type=large"
   						});
 
-  						$state.go('app.home');
+  						$state.go('menu');
 
   					}, function(fail){
   						//fail get profile info
   						console.log('profile info fail', fail);
   					});
   				}else{
-  					$state.go('app.home');
+  					$state.go('menu');
   				}
 
        } else {
@@ -181,7 +184,7 @@
       }).then(function(result) {
         if (result.data.sucesso) {
           console.log(result.data.mensagem);
-          $state.go('app.login');
+          $state.go('login');
         } else {
           console.log(result.data.mensagem);
         }

@@ -48,6 +48,13 @@ body {
 .span {
   padding: 10px;
 }
+.text_response{
+  font-weight:bold;
+  color: #D8000C;
+  margin-left: 0.2cm;
+  font-size: 80%;
+
+}
 #text_data {
   margin-left: 2cm;
 }
