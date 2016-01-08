@@ -198,7 +198,7 @@
         console.log("Clicou no botão confirmar");
       }
     }
-  })
+  });
     var compareTo = function()
     {
       return {

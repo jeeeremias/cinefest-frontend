@@ -13,7 +13,7 @@
     <div class="form-group" ng-class="{ 'has-error' : votacaoForm.cpf.$invalid && !votacaoForm.cpf.$pristine && submitted }">
       <div class="list list-inset">
       <label class="item item-input">
-        <input type="text" placeholder="CPF" name="cpf" ng-model="cpf" ng-cpf required>
+        <input type="text" placeholder="CPF" name="cpf" ng-model="cpf" ng-cpf ui-mask="999.999.999-99" ui-mask-placeholder required>
         <span style="color:red" ng-class="error" ng-show="votacaoForm.cpf.$invalid && !votacaoForm.cpf.$pristine && submitted"><div class="span">*CPF inválido</div></span>
       </label>
       <div class="row">

@@ -4,7 +4,7 @@
 // 'cinefestApp' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 // 'cinefestApp.controllers' is found in controllers.js
-var app = angular.module('cinefestApp', ['ionic', 'ngCordova', 'cinefestApp.controllers','filmeServices','ngCpfCnpj'])
+var app = angular.module('cinefestApp', ['ionic', 'ngCordova', 'cinefestApp.controllers','filmeServices','ngCpfCnpj','ui.mask'])
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
@@ -46,11 +46,11 @@ var app = angular.module('cinefestApp', ['ionic', 'ngCordova', 'cinefestApp.cont
 
   .state('app.detalhe_filme', {
     url: '/detalhe_filme',
-    templateUrl: 'templates/detalhe_filme.html',
+    templateUrl: 'templates/detalhe_filme.html'
   })
   .state('votacao', {
     url: '/votacao',
-    templateUrl: '/templates/votacao.html',
+    templateUrl: 'templates/votacao.html'
   })
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/');
