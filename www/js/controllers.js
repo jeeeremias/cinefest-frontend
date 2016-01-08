@@ -191,6 +191,14 @@
       });
     }
   })
+  .controller('votoCtrl', function($scope, $http){
+    $scope.submitForm = function(){
+      $scope.submitted = true;
+      if ($scope.submitted == true){
+        console.log("Clicou no botão confirmar");
+      }
+    }
+  })
     var compareTo = function()
     {
       return {

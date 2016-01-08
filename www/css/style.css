@@ -47,7 +47,9 @@ body {
 }
 .span {
   padding: 10px;
+  font-size: 10px;
 }
+
 .text_response{
   font-weight:bold;
   color: #D8000C;
