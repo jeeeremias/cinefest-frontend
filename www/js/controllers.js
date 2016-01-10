@@ -1,5 +1,6 @@
-  var app = angular.module('cinefestApp.controllers', [])
+  var app = angular.module('cinefestApp.controllers', []);
   var endpoint = 'http://rest-cinefest.rhcloud.com';
+//  var endpoint = 'http://localhost:8080';
 
   app.controller('filmeCtrl', function($scope, $http, $ionicLoading, Filmes, Imagem, sharedProperties) {
     console.log('baixando filmes');
@@ -39,7 +40,7 @@
     }
   });
 
-  app.controller('LoginCtrl', function($scope, $http, $state, $q, $ionicLoading, $ionicPopup, $ionicNavBarDelegate, UserService) {
+  app.controller('LoginCtrl', function($scope, $http, $state, $q, $ionicLoading, $ionicPopup, $ionicNavBarDelegate, $cordovaToast, UserService) {
     $ionicNavBarDelegate.showBar(false);
 
     $scope.usuario = JSON.parse(window.localStorage['usuario'] || '{}');
@@ -49,19 +50,27 @@
         url: endpoint + '/login',
         method: "POST",
         data: $scope.usuario
-      }).then(function(result) {
-        if (result.data.sucesso) {
+      }).then(function(success) {
+        if (success.data.sucesso) {
           window.localStorage['usuario'] = JSON.stringify($scope.usuario);
           $state.go('menu');
         } else {
-          console.log(result.data.mensagem);
+          console.log(success.data.mensagem);
+          $cordovaToast.showLongBottom(success.data.mensagem);
         }
+      }, function(error){
+
       });
     }
 
     if ($scope.usuario.email != undefined && $scope.usuario.senha != undefined) {
       $scope.submit();
     }
+
+    $scope.goCadastro = function() {
+      console.log("fds");
+      $state.go('cadastro');
+    };
 
     //This is the success callback from the login method
     var fbLoginSuccess = function(response) {
