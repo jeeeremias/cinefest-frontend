@@ -200,6 +200,7 @@
     }
   })
   .controller('votoCtrl', function($scope, $http){
+    $scope.voto = {};
     $scope.submitForm = function(){
       $scope.submitted = true;
       if ($scope.submitted == true){
