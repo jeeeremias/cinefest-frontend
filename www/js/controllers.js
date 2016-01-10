@@ -2,7 +2,7 @@
   var endpoint = 'http://rest-cinefest.rhcloud.com';
 //  var endpoint = 'http://localhost:8080';
 
-  app.controller('filmeCtrl', function($scope, $http, $ionicLoading, Filmes, Imagem, sharedProperties) {
+  app.controller('filmeCtrl', function($scope, $http, $ionicLoading, $cordovaToast, Filmes, Imagem, sharedProperties) {
     console.log('baixando filmes');
     $scope.requestListFilmes = {pag:0, tam:5}
     $scope.lista = [];
@@ -22,6 +22,8 @@
         console.log($scope.lista);
         $scope.$broadcast('scroll.infiniteScrollComplete');
         $scope.requestListFilmes.pag ++;
+      }, function(error){
+        $cordovaToast.showLongBottom(error.data.error);
       });
     };
 
@@ -40,11 +42,9 @@
     }
   });
 
-  app.controller('LoginCtrl', function($scope, $http, $state, $q, $ionicLoading, $ionicPopup, $ionicNavBarDelegate, $cordovaToast, UserService) {
+  app.controller('LoginCtrl', function($scope, $http, $state, $cordovaDialogs, $q, $ionicLoading, $ionicPopup, $ionicNavBarDelegate, $cordovaToast, UserService) {
     $ionicNavBarDelegate.showBar(false);
-
     $scope.usuario = JSON.parse(window.localStorage['usuario'] || '{}');
-
     $scope.submit = function() {
        $http({
         url: endpoint + '/login',
@@ -59,7 +59,7 @@
           $cordovaToast.showLongBottom(success.data.mensagem);
         }
       }, function(error){
-
+        $cordovaToast.showLongBottom(error.data.error);
       });
     }
 
@@ -93,7 +93,7 @@
         });
 
         $ionicLoading.hide();
-        $state.go('app.lista_filmes');
+        $state.go('lista_filmes');
 
       }, function(fail){
         //fail get profile info
@@ -152,14 +152,14 @@
   							picture : "http://graph.facebook.com/" + success.authResponse.userID + "/picture?type=large"
   						});
 
-  						$state.go('app.home');
+  						$state.go('menu');
 
   					}, function(fail){
   						//fail get profile info
   						console.log('profile info fail', fail);
   					});
   				}else{
-  					$state.go('app.home');
+  					$state.go('menu');
   				}
 
        } else {
@@ -178,7 +178,7 @@
     };
   })
 
-  .controller('RegisterCtrl', function($scope, $http, $state) {
+  .controller('RegisterCtrl', function($scope, $http, $state, $cordovaToast) {
 
     $scope.usuario = {};
 
@@ -190,13 +190,23 @@
       }).then(function(result) {
         if (result.data.sucesso) {
           console.log(result.data.mensagem);
-          $state.go('app.login');
+          $state.go('login');
         } else {
           console.log(result.data.mensagem);
         }
+      }, function(error){
+        $cordovaToast.showLongBottom(error.data.error);
       });
     }
   })
+  .controller('votoCtrl', function($scope, $http){
+    $scope.submitForm = function(){
+      $scope.submitted = true;
+      if ($scope.submitted == true){
+        console.log("Clicou no botão confirmar");
+      }
+    }
+  });
     var compareTo = function()
     {
       return {

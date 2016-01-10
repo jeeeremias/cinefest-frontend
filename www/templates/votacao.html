@@ -1,0 +1,29 @@
+<ion-view view-title="Votação">
+  <ion-content ng-controller="votoCtrl">
+    <ion-list>
+
+  <ion-radio>
+
+</ion-radio>
+
+</ion-list>
+
+<form name="votacaoForm" ng-submit="submitForm(votacaoForm.$valid)" novalidate>
+
+    <div class="form-group" ng-class="{ 'has-error' : votacaoForm.cpf.$invalid && !votacaoForm.cpf.$pristine && submitted }">
+      <div class="list list-inset">
+      <label class="item item-input">
+        <input type="text" placeholder="CPF" name="cpf" ng-model="cpf" ng-cpf ui-mask="999.999.999-99" ui-mask-placeholder required>
+        <span style="color:red" ng-class="error" ng-show="votacaoForm.cpf.$invalid && !votacaoForm.cpf.$pristine && submitted"><div class="span">*CPF inválido</div></span>
+      </label>
+      <div class="row">
+        <div class="col col-33 col-offset-33">
+        <button style="align:center" type="submit" class="button button-balanced">Confirmar</button>
+      </div>
+      </div>
+    </div>
+  </div>
+  </form>
+
+</ion-content>
+</ion-view>
