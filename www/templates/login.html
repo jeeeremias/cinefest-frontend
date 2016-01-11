@@ -3,22 +3,25 @@
     <div class="img_login">
       <img src="img/logo.jpg">
     </div>
+    <form name="loginForm" novalidade>
     <label class="item item-input">
-      <input type="email" placeholder="Email" ng-model="usuario.email">
+      <input type="email" placeholder="Email" ng-model="usuario.email" name="email" required>
+      <span style="color:red" ng-class="error" ng-show="loginForm.email.$invalid && !loginForm.email.$pristine"><div class="span">*Digite um email válido</div></span>
     </label>
     <label class="item item-input">
-      <input type="password" placeholder="Senha" ng-model="usuario.senha">
+      <input type="password" placeholder="Senha" ng-model="usuario.senha" name="senha" required>
     </label>
     <div class="row">
       <div class="col">
         <button class="button facebook-sign-in icon button-block" ng-click="facebookSignIn()">Facebook</button>
       </div>
       <div class="col">
-        <button class="button button-light button-block" ng-click="submit()" type="submit">Login</button>
+        <button class="button button-light button-block" ng-click="submit()" type="submit" ng-disabled="loginForm.$invalid">Login</button>
       </div>
     </div>
     <div class="text-right">
       <button class="button button-clear button-positive small_button pull-right" ng-click="goCadastro()">Faça seu cadastro</button>
     </div>
+  </form>
   </ion-content>
 </ion-view>
