@@ -72,3 +72,8 @@ body {
     height: 80%;
     width: 80%;
 }
+.custom_footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}

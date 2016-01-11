@@ -1,38 +1,50 @@
 <ion-view view-title="Votação">
-  <ion-content ng-controller="votoCtrl">
-    <ion-scroll style="height: 370px">
-      <div style="height: auto">
+  <ion-content ng-controller="votoCtrl" scroll="false">
+    <ion-scroll>
+      <div>
           <ion-list>
             <ul class="list">
-      <li class="item">
-      item 1
-      </li>
-      <li class="item">
-      item 2
-      </li>
-      <li class="item">
-      item 3
-      </li>
-      <li class="item">
-      item 4
-      </li>
-      <li class="item">
-      item 5
-      </li>
-      <li class="item">
-      item 6
-      </li>
-      <li class="item">
-      item 7
-      </li>
-      <li class="item">
-      item 8
-      </li>
-  </ul>
+              <li class="item">
+              item 1
+              </li>
+              <li class="item">
+              item 2
+              </li>
+              <li class="item">
+              item 3
+              </li>
+              <li class="item">
+              item 4
+              </li>
+              <li class="item">
+              item 5
+              </li>
+              <li class="item">
+              item 6
+              </li>
+              <li class="item">
+              item 7
+              </li>
+              <li class="item">
+              item 8
+              </li>
+              <li class="item">
+              item 5
+              </li>
+              <li class="item">
+              item 6
+              </li>
+              <li class="item">
+              item 7
+              </li>
+              <li class="item">
+              item 8
+              </li>
+            </ul>
         </ion-list>
       </div>
     </ion-scroll>
-
+<div class="custom_footer">
       <form name="votacaoForm" ng-submit="submitForm(votacaoForm.$valid)" novalidate>
           <div class="form-group" ng-class="{ 'has-error' : votacaoForm.cpf.$invalid && !votacaoForm.cpf.$pristine && submitted }">
             <div class="list list-inset">
@@ -49,5 +61,6 @@
         </div>
         </form>
 
+</div>
 </ion-content>
 </ion-view>
