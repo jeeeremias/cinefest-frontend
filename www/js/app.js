@@ -21,7 +21,7 @@ var app = angular.module('cinefestApp', ['ionic', 'ngCordova', 'cinefestApp.cont
   });
 })
 
-.config(function($stateProvider, $urlRouterProvider) {
+.config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider) {
   $stateProvider
 
   .state('login', {
@@ -43,15 +43,26 @@ var app = angular.module('cinefestApp', ['ionic', 'ngCordova', 'cinefestApp.cont
     url: '/lista_filmes',
       templateUrl: 'templates/lista_filmes.html'
   })
-
-  .state('app.detalhe_filme', {
-    url: '/detalhe_filme',
-    templateUrl: 'templates/detalhe_filme.html'
-  })
-  .state('votacao', {
-    url: '/votacao',
-    templateUrl: 'templates/votacao.html'
-  })
+    .state('detalhe_filme', {
+      url: '/detalhe_filme',
+      templateUrl: 'templates/detalhe_filme.html'
+    })
+    .state('votacao', {
+      url: '/votacao',
+      templateUrl: 'templates/votacao.html'
+    })
+    .state('sessao_paladar', {
+      url: '/sessao_paladar',
+      templateUrl: 'templates/sessao_paladar.html'
+    })
+    .state('programacao', {
+      url: '/programacao',
+      templateUrl: 'templates/programacao.html'
+    })
+    .state('sobre', {
+      url: '/sobre',
+      templateUrl: 'templates/sobre.html'
+    })
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/');
+  $urlRouterProvider.otherwise('/menu');
 });

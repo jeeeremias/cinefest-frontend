@@ -2,7 +2,12 @@
   var endpoint = 'http://rest-cinefest.rhcloud.com';
 //  var endpoint = 'http://localhost:8080';
 
-  app.controller('filmeCtrl', function($scope, $http, $ionicLoading, $cordovaToast, Filmes, Imagem, sharedProperties) {
+  app.controller ('barCtrl', function($scope, $ionicHistory){
+    $scope.goBack = function () {
+      $ionicHistory.goBack();
+    };
+  });
+  app.controller('filmeCtrl', function($scope, $http, $ionicLoading, $cordovaToast, Filmes, Imagem, sharedProperties, $state) {
     console.log('baixando filmes');
     $scope.requestListFilmes = {pag:0, tam:5}
     $scope.lista = [];
@@ -27,155 +32,33 @@
       });
     };
 
-    $scope.nome = function (nome, autor, descricao) {
-      sharedProperties.addText(nome, autor, descricao);
-      console.log(nome, autor, descricao);
-
+    $scope.nome = function (idFilme) {
+      sharedProperties.setProperty(idFilme);
+      console.log('id passado' + idFilme);
+      $state.go('detalhe_filme');
     };
-
-    $scope.detalhes = sharedProperties.getNome();
+    $scope.goBack = function(){
+      $ionicHistory.goBack();
+    }
   });
 
+  app.controller('detalhesCtrl', function($scope, $http, sharedProperties){
+    $scope.id = {id:sharedProperties.getProperty()};
+    $http({
+      url: endpoint + '/filme',
+      method: "GET",
+      params: $scope.id
+    }).then(function(result){
+      console.log(result.data);
+    }, function(error){
+      console.log('erro' + error.data.error);
+    });
+  });
   app.controller('MenuCtrl', function($scope, $http, $state, $q, $ionicLoading, $ionicPopup, $ionicNavBarDelegate, UserService) {
     $scope.go = function(pagina) {
+      console.log(pagina);
       $state.go(pagina);
     }
-  });
-
-  app.controller('LoginCtrl', function($scope, $http, $state, $cordovaDialogs, $q, $ionicLoading, $ionicPopup, $ionicNavBarDelegate, $cordovaToast, UserService) {
-    $ionicNavBarDelegate.showBar(false);
-    $scope.usuario = JSON.parse(window.localStorage['usuario'] || '{}');
-    $scope.submit = function() {
-       $http({
-        url: endpoint + '/login',
-        method: "POST",
-        data: $scope.usuario
-      }).then(function(success) {
-        if (success.data.sucesso) {
-          window.localStorage['usuario'] = JSON.stringify($scope.usuario);
-          $state.go('menu');
-        } else {
-          console.log(success.data.mensagem);
-          $cordovaToast.showLongBottom(success.data.mensagem);
-        }
-      }, function(error){
-        $cordovaToast.showLongBottom(error.data.error);
-      });
-    }
-
-    if ($scope.usuario.email != undefined && $scope.usuario.senha != undefined) {
-      $scope.submit();
-    }
-
-    $scope.goCadastro = function() {
-      console.log("fds");
-      $state.go('cadastro');
-    };
-
-    //This is the success callback from the login method
-    var fbLoginSuccess = function(response) {
-      if (!response.authResponse){
-        fbLoginError("Cannot find the authResponse");
-        return;
-      }
-
-      var authResponse = response.authResponse;
-
-      getFacebookProfileInfo(authResponse)
-      .then(function(profileInfo) {
-        //for the purpose of this example I will store user data on local storage
-        UserService.setUser({
-          authResponse: authResponse,
-  				userID: profileInfo.id,
-  				name: profileInfo.name,
-  				email: profileInfo.email,
-          picture : "http://graph.facebook.com/" + authResponse.userID + "/picture?type=large"
-        });
-
-        $ionicLoading.hide();
-        $state.go('lista_filmes');
-
-      }, function(fail){
-        //fail get profile info
-        console.log('profile info fail', fail);
-      });
-    };
-
-
-    //This is the fail callback from the login method
-    var fbLoginError = function(error){
-      console.log('fbLoginError', error);
-      $ionicLoading.hide();
-    };
-
-    //this method is to get the user profile info from the facebook api
-    var getFacebookProfileInfo = function (authResponse) {
-      var info = $q.defer();
-
-      facebookConnectPlugin.api('/me?fields=email,name&access_token=' + authResponse.accessToken, null,
-        function (response) {
-  				console.log(response);
-          info.resolve(response);
-        },
-        function (response) {
-  				console.log(response);
-          info.reject(response);
-        }
-      );
-      return info.promise;
-    };
-
-    //This method is executed when the user press the "Login with facebook" button
-    $scope.facebookSignIn = function() {
-      console.log('botaosauhsa');
-      facebookConnectPlugin.getLoginStatus(function(success){
-       if(success.status === 'connected'){
-          // the user is logged in and has authenticated your app, and response.authResponse supplies
-          // the user's ID, a valid access token, a signed request, and the time the access token
-          // and signed request each expire
-          console.log('getLoginStatus', success.status);
-
-  				//check if we have our user saved
-  				var user = UserService.getUser('facebook');
-
-  				if(!user.userID)
-  				{
-  					getFacebookProfileInfo(success.authResponse)
-  					.then(function(profileInfo) {
-
-  						//for the purpose of this example I will store user data on local storage
-  						UserService.setUser({
-  							authResponse: success.authResponse,
-  							userID: profileInfo.id,
-  							name: profileInfo.name,
-  							email: profileInfo.email,
-  							picture : "http://graph.facebook.com/" + success.authResponse.userID + "/picture?type=large"
-  						});
-
-  						$state.go('menu');
-
-  					}, function(fail){
-  						//fail get profile info
-  						console.log('profile info fail', fail);
-  					});
-  				}else{
-  					$state.go('menu');
-  				}
-
-       } else {
-          //if (success.status === 'not_authorized') the user is logged in to Facebook, but has not authenticated your app
-          //else The person is not logged into Facebook, so we're not sure if they are logged into this app or not.
-          console.log('getLoginStatus', success.status);
-
-  			  $ionicLoading.show({
-            template: 'Logging in...'
-          });
-
-          //ask the permissions you need. You can learn more about FB permissions here: https://developers.facebook.com/docs/facebook-login/permissions/v2.4
-          facebookConnectPlugin.login(["public_profile", "email", "user_friends"], fbLoginSuccess, fbLoginError);
-        }
-      });
-    };
   })
 
   .controller('RegisterCtrl', function($scope, $http, $state, $cordovaToast) {
@@ -192,7 +75,7 @@
           console.log(result.data.mensagem);
           $state.go('login');
         } else {
-          console.log(result.data.mensagem);
+          $cordovaToast.showLongBottom(result.data.mensagem);
         }
       }, function(error){
         $cordovaToast.showLongBottom(error.data.error);
@@ -200,6 +83,19 @@
     }
   })
   .controller('votoCtrl', function($scope, $http){
+    $scope.lista = [];
+    $scope.requestListFilmes = {pag:0, tam:10}
+    $http({
+      url: endpoint + '/filmes',
+      method: 'GET',
+      params: $scope.requestListFilmes
+    }).then(function(result){
+      console.log(result.data);
+      $scope.lista = result.data;
+    }), function(error){
+      console.log('erro' + error.data.error);
+    }
+
     $scope.voto = {};
     $scope.submitForm = function(){
       $scope.submitted = true;
@@ -207,7 +103,57 @@
         console.log("Clicou no botão confirmar");
       }
     }
-  });
+  })
+    .controller('cardapioCtrl', function($scope, $http){
+      $scope.lanches = [
+        {nome:'PULP FICTION', ingredientes: 'PÃO DE HAMBÚRGUER, HAMBÚRGUER BOVINO, BACON EM FATIAS,CHEDDAR, ANÉIS EMPANADOS E MAIONESE ESPECIAL'},
+        {nome:'KILL BILL 1', ingredientes: 'PÃO DE GERGELIM, HAMBÚRGUER DE FRANGO, QUEIJO PRATO, CEBOLA E PIMENTÃO AO MOLHO DE SOJA, MAIONESE E ALFACE AMERICANA'},
+        {nome: 'KILL BILL 2', ingredientes: 'PÃO DE GERGELIM, HAMBÚRGUER SUÍNO, QUEIJO PRATO, CHAMPIGNON GRELHADO, MAIONESE DE WASABI E AGRIÃO'},
+        {nome: 'BASTARDOS INGLÓRIOS', ingredientes: 'PÃO DE BAGUETE, LINGUIÇA SUÍNA, QUEIJO PRATO, PURÊ DE BATATA, MAIONESE DE MOSTARDA E VINAGRETE A BASE DE REPOLHO'},
+        {nome: 'CÃES DE ALUGUEL', ingredientes: 'PÃO DE CACHORRO QUENTE, SALSICHA VEGETARIANA, MAIONESE ESPECIAL, VINAGRETE, BATATA PALHA E ALFACE AMERICANA'}
+      ]
+      $scope.massas = [
+        {nome: 'OS BOAS-VIDAS', ingredientes: 'LASANHA BOLONHESA, PRESUNTO, QUEIJO, MOLHO AO SUGO, MOLHO BRANCO, MANJERICÃO E PARMESÃO'},
+        {nome: '8½ - OITO E MEIO', ingredientes: 'LASANHA DE BRÓCOLIS, PARMESÃO, PROVOLONE, CATUPIRY, GORGONZOLA, MUSSARELA, GERGELIM E MANJERICÃO CORTADO'},
+        {nome: 'GINGER E FRED ', ingredientes: 'RONDELLI DE PRESUNTO, QUEIJO, NOZ-MOSCADA, ORÉGANO E MOLHO AO SUGO'},
+        {nome: 'A VOZ DA LUA ', ingredientes: 'RONDELLI DE FRANGO, CATUPIRY E MOLHO BRANCO'},
+        {nome: 'AMORES NA CIDADE ' , ingredientes: 'PANQUECA DE PALMITO AO MOLHO SUGO'},
+        {nome: 'ROMA ', ingredientes: 'PANQUECA DE CARNE COM BACON, AZEITONA VERDE E MOLHO AO SUGO'}
+      ]
+      $scope.doces = [
+        {nome: 'BISCOITO DE CASTANHA-DO-PARÁ (150G)'},
+        {nome: 'TORTA DE CUPUAÇU E GANACHE COM MASSA DE CASTANHA'},
+        {nome: 'TORTINHA DE MORANGO'},
+        {nome: 'TORTINHA DE LIMÃO'},
+        {nome: 'TORTA HOLANDESA'},
+        {nome: 'BOMBOM DE CUPUAÇU'}
+      ]
+      $scope.empadas = [
+        {nome: 'CABRA MARCADO PARA MORRER', ingredientes: 'EMPADA DE VATAPÁ'},
+        {nome: 'O FIM E O PRINCÍPIO', ingredientes: 'EMPADA DE PALMITO'},
+        {nome: 'JOGO DE CENA ', ingredientes: 'EMPADA DE FRANGO, CATUPIRY'},
+        {nome: 'BABILÔNIA 2000', ingredientes: 'EMPADA DE ALHO-PORÓ COM PARMESÃO'}
+      ]
+      $scope.tapiocas = [
+        {nome: 'TERRA EM TRANSE', ingredientes: 'TAPIOCA DE CARNE SECA, CEBOLA E PURÊ DE ABÓBORA'},
+        {nome: 'AMAZONAS, AMAZONAS', ingredientes: 'TAPIOCA DE QUEIJO COALHO E GOIABADA'},
+        {nome: 'A IDADE DA TERRA', ingredientes: 'TAPIOCA DE QUEIJO BRANCO, TOMATE E MANJERICÃO'},
+        {nome: 'O DRAGÃO DA MALDADE CONTRA O SANTO GUERREIRO', ingredientes: 'TAPIOCA DE CARNE MOÍDA, FEIJÃO FRADINHO E PIMENTA DEDO DE MOÇA'}
+      ]
+    })
+  .controller('progracaoCtrl', function($scope, $http){
+    $scope.programacao = [];
+
+    $http({
+      url: endpoint + '/programacao',
+      method: 'GET'
+    }).then(function(result){
+      console.log(result.data);
+      $scope.programacao = result.data;
+    }), function(error){
+      console.log('erro' + error.data.error);
+    }
+  })
     var compareTo = function()
     {
       return {

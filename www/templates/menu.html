@@ -1,30 +1,45 @@
-<ion-view view-title="Menu" hide-back-button="true">
-  <ion-content ng-controller="MenuCtrl" padding="true" scroll="false">
+
+<ion-view view-title="" hide-back-button="true" hide-nav-bar="true">
+  <ion-content ng-controller="MenuCtrl" padding="true" scroll="false" class="background mmenu">
     <div class = "row">
-      <div class = "col text-center">[LOGO / HEADER]</div>
+      <div class = "col text-center">
+        <img src="img/assets/img_logo.png" class="img_menu_logo"></div>
+      </div>
     </div>
     <div class = "row">
       <div class = "col text-center">
-        <img src="img/film.png" class="img_menu" ng-click="go('lista_filmes')">
+        <img src="img/assets/img_filmes.png" class="img_menu" ng-click=go('lista_filmes')>
         <br/>
         Filmes
       </div>
       <div class = "col text-center">
-        <img src="img/calendar.png" class="img_menu">
+        <img src="img/assets/img_programacao.png" class="img_menu" ng-click=go('programacao')>
         <br/>
         Programação
       </div>
     </div>
-    <div class = "row">
+    <div class = "row" style="padding-top: 5%">
       <div class = "col text-center">
-        <img src="img/info.png" class="img_menu">
+        <img src="img/assets/img_votacao.png" class="img_menu" ng-click=go('votacao')>
         <br/>
-        Informações
+        Votação
       </div>
       <div class = "col text-center">
-        <img src="img/fb.png" class="img_menu">
+        <img src="img/assets/img_sessao_paladar.png" class="img_menu" ng-click=go('sessao_paladar')>
+        <br/>
+        Sessão Paladar
+      </div>
+    </div>
+    <div class="row">
+      <div class="col text-center" style="margin-left: 10%">
+        <img src="img/assets/img_facebook.png" class="img_menu_last_row" href="#" onclick="window.open('fb://facewebmodal/f?href=https://www.facebook.com/cinefestvoto', '_system');">
         <br/>
         Facebook
+      </div>
+      <div class="col text-center" style="margin-right: 9%">
+        <img src="img/assets/img_sobre.png" class="img_menu_last_row" ng-click=go('sobre')>
+        <br/>
+        Sobre
       </div>
     </div>
   </ion-content>

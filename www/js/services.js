@@ -20,22 +20,19 @@ filmeServices.factory('Imagem', ['$resource',
     });
   }]);
 
-  filmeServices.service('sharedProperties', function () {
-            var property = [];
-            var addText = function(nome, autor, descricao){
-              property.splice(0);
-              property.push({nome:nome, autor:autor, descricao:descricao});
-            };
+filmeServices.service('sharedProperties', function () {
+  var id;
 
-            var getNome = function(){
-              return property;
-            };
+  return {
 
-            return {
-              addText: addText,
-              getNome: getNome
-            };
-        });
+    setProperty: function(value){
+      id = value;
+    },
+    getProperty: function(){
+      return id;
+    }
+  };
+});
 
         filmeServices.service('UserService', function() {
   // For the purpose of this example I will store user data on ionic local storage but you should save it on a database

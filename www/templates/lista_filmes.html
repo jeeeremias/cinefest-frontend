@@ -1,18 +1,23 @@
-<ion-view view-title="Filmes">
-  <ion-content ng-controller="filmeCtrl">
-    <ion-list>
-      <ion-item class="item item-thumbnail-left" ng-repeat="filme in lista track by $index" href="#/app/detalhe_filme" ng-click="nome(filme.nome, filme.autor, filme.descricao)">
-        <img ng-src="http://rest-cinefest.rhcloud.com/imagem?id={{filme.imagens[0].resource}}">
-        <h2><b>{{filme.nome}}</b></h2>
-        <h2><p><b>{{filme.autor}}</h2></b></p>
-        <div class="item-text-wrap">
-        <p>{{filme.descricao}}</p>
-        </div>
-      </ion-item>
-    </ion-list>
-    <ion-infinite-scroll ng-if="!noMoreItemsAvailable"
-      on-infinite="loadMore()"
-      distance="1%">
-    </ion-infinite-scroll>
-  </ion-content>
-</ion-view>
+<ion-header-bar align-title="left" class="bar-stable">
+  <div class="buttons" ng-controller="barCtrl">
+    <a class="button icon-left ion-android-arrow-back  button-clear" style="color: #e2c054" ng-click="goBack()"></a>
+  </div>
+  <h1 class="title"><div class="bar_titulo">Filmes</div></h1>
+</ion-header-bar>
+<ion-content class="background lista_filmes" ng-controller="filmeCtrl">
+  <ion-list>
+    <ion-item class="item item-thumbnail-left item-icon-right" ng-repeat="filme in lista track by $index" ng-click="nome(filme.idFilme)">
+      <img ng-src="http://rest-cinefest.rhcloud.com/imagem?id={{filme.imagens[0].resource}}">
+      <h2>{{filme.nome}}</h2>
+      <h2><p><b>{{filme.autor}}</b></p></h2>
+      <div class="item-text-wrap">
+        <p>{{filme.descricaoCurta}}</p>
+      </div>
+      <i class="icon ion-ios-arrow-right"></i>
+    </ion-item>
+  </ion-list>
+  <ion-infinite-scroll ng-if="!noMoreItemsAvailable"
+                       on-infinite="loadMore()"
+                       distance="1%">
+  </ion-infinite-scroll>
+</ion-content>

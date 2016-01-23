@@ -1,24 +1,25 @@
-<ion-view view-title="Sobre o filme">
-  <ion-content ng-controller="movieCtrl">
-      <img src="img/filme.jpg" class="img_detalhes_filme">
-      <a ng-repeat="filme in detalhes track by $index">
-        <div class="row">
-          <div class="col">
-            <b>{{filme.nome}}</b>
-        </div>
-    </div>
-    <div class="row">
-      <div class="col col">
-        <b><button class="button facebook-sign-in button-small" href="#">{{filme.autor}}</button></b>
-      </div>
-      <div class="col col"><div id="text_data">23/02 - 19:40</div></div>
-    </div>
-    <div class="row">
-      <div class="col">
-        <div class="item item-text-wrap">
-        <p>{{filme.descricao}}</p>
-      </div>
-      </div>
-    </div>
-  </ion-content>
-</ion-view>
+<ion-header-bar align-title="left" class="bar-stable">
+  <div class="buttons" ng-controller="barCtrl">
+    <a class="button icon-left ion-android-arrow-back  button-clear" style="color: #e2c054" ng-click="goBack()"></a>
+  </div>
+  <h1 class="title"><div class="bar_titulo">Detalhes</div></h1>
+</ion-header-bar>
+
+<ion-content class="has-header background detalhe_filme">
+  <img src="img/logo.jpg" class="img_detalhes_filme">
+  <img src="img/logo.jpg" class="img_detalhes_filme_bloco1">
+  <img src="img/logo.jpg" class="img_detalhes_filme_bloco2">
+  <img src="img/logo.jpg" class="img_detalhes_filme_bloco3">
+
+  <div class="detalhes_filme" style="margin-left: 6%">
+    <h4>Titulo do Filme</h4>
+    <b>Diretor: Nome do Diretor</b>
+    <p><b>Exibição: 23/02 - 19:40</b></p>
+    <p>
+      This is a "Facebook" styled Card. The header is created from a Thumbnail List item,
+      the content is from a card-body consisting of an image and paragraph text. The footer
+      consists of tabs, icons aligned left, within the card-footer.
+    </p>
+  </div>
+</ion-content>
+

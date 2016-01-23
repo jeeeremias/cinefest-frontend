@@ -1,66 +1,33 @@
-<ion-view view-title="Votação">
-  <ion-content ng-controller="votoCtrl" scroll="false">
+<ion-header-bar align-title="left" class="bar-stable">
+  <div class="buttons" ng-controller="barCtrl">
+    <a class="button icon-left ion-android-arrow-back  button-clear" style="color: #e2c054" ng-click="goBack()"></a>
+  </div>
+  <h1 class="title"><div class="bar_titulo">Votação</div></h1>
+</ion-header-bar>
+<ion-content ng-controller="votoCtrl" scroll="false" class="background votacao">
     <ion-scroll>
       <div>
-          <ion-list>
-            <ul class="list">
-              <li class="item">
-              item 1
-              </li>
-              <li class="item">
-              item 2
-              </li>
-              <li class="item">
-              item 3
-              </li>
-              <li class="item">
-              item 4
-              </li>
-              <li class="item">
-              item 5
-              </li>
-              <li class="item">
-              item 6
-              </li>
-              <li class="item">
-              item 7
-              </li>
-              <li class="item">
-              item 8
-              </li>
-              <li class="item">
-              item 5
-              </li>
-              <li class="item">
-              item 6
-              </li>
-              <li class="item">
-              item 7
-              </li>
-              <li class="item">
-              item 8
-              </li>
-            </ul>
+        <ion-list>
+          <ion-radio class="item item-thumbnail-left" ng-repeat="filme in lista track by $index">
+            <img ng-src="http://rest-cinefest.rhcloud.com/imagem?id={{filme.imagens[0].resource}}">
+            <h2>{{filme.nome}}</h2>
+            <b>Diretor:{{filme.autor}}</b>
+          </ion-radio>
         </ion-list>
       </div>
     </ion-scroll>
-<div class="custom_footer">
+    <div class="custom_footer">
       <form name="votacaoForm" ng-submit="submitForm(votacaoForm.$valid)" novalidate>
-          <div class="form-group" ng-class="{ 'has-error' : votacaoForm.cpf.$invalid && !votacaoForm.cpf.$pristine && submitted }">
-            <div class="list list-inset">
+        <div class="form-group" ng-class="{ 'has-error' : votacaoForm.cpf.$invalid && !votacaoForm.cpf.$pristine && submitted }">
+          <div class="list list-inset">
             <label class="item item-input">
               <input type="text" placeholder="CPF" name="cpf" ng-model="voto.cpf" ng-cpf ui-mask="999.999.999-99" ui-mask-placeholder required>
               <span style="color:red" ng-class="error" ng-show="votacaoForm.cpf.$invalid && !votacaoForm.cpf.$pristine && submitted"><div class="span">*CPF inválido</div></span>
+              <div class="bt_voto"><button style="align:center" type="submit" class="button button-balanced">Votar</button></div>
             </label>
-            <div class="row">
-              <div class="col col-33 col-offset-33">
-              <button style="align:center" type="submit" class="button button-balanced">Confirmar</button>
-            </div>
-            </div>
           </div>
         </div>
-        </form>
-
-</div>
+      </form>
+    </div>
 </ion-content>
-</ion-view>
+
