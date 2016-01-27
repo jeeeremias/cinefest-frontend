@@ -6,25 +6,19 @@
     <div class="bar_titulo">Programação</div>
   </h1>
 </ion-header-bar>
-<div class="bar bar-subheader bar-stable">
-  <i class="button button-clear ion-chevron-left" style="color:#E5E6E9;"></i>
-  <h2 class="title" style="color:#E5E6E9;">00/00 Dia da semana</h2>
-  <i class="button button-clear ion-chevron-right" style="color: #E5E6E9;"> </i>
+<div class="bar bar-subheader bar-stable" ng-controller="progracaoCtrl">
+  <i class="button button-clear ion-chevron-left" ng-disabled="desabilitar" style="color:#E5E6E9;"></i>
+
+  <h2 class="title" style="color:#E5E6E9;">{{dia}} Dia da semana</h2>
+  <i class="button button-clear ion-chevron-right" ng-click="proximo()" style="color: #E5E6E9;"> </i>
 </div>
-<ion-content class="background votacao has-header has-subheader programacao">
-  <div class="form_programacao">
-    <h5 class="title">00:00 - Titulo da Atividade</h5>
-    <p>Descrição da AtividadeDescrição da Atividade
-      Descrição da Atividade
-      Descrição da Atividade</p>
-    <h5 class="title">00:00 - Titulo da Atividade</h5>
-    <p>Descrição da AtividadeDescrição da Atividade
-      Descrição da Atividade
-      Descrição da Atividade</p>
-    <h5 class="title">00:00 - Titulo da Atividade</h5>
-    <p>Descrição da AtividadeDescrição da Atividade
-      Descrição da Atividade
-      Descrição da Atividade</p>
-  </div>
+<ion-content class="background votacao has-header has-subheader programacao" ng-controller="progracaoCtrl">
+  <ion-item ng-repeat="programacao in programacao">
+    <div class="form_programacao">
+      <h3 class="title">{{programacao.hora}} - {{programacao.titulo}}</h3>
+
+      <p>{{programacao.genero}}</p>
+    </div>
+  </ion-item>
 </ion-content>
 

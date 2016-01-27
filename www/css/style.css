@@ -81,8 +81,8 @@ body {
   width: 40%;
 }
 .img_menu_last_row{
-  width:30%;
-  padding-top: 30%;
+  width:35%;
+  margin-top: 30%;
 }
 
 .img_menu_logo {
@@ -164,7 +164,7 @@ body {
 .form {
   margin-left: 6%;
 }
-.programacao h5{
+.programacao h3{
   color: #e2c054;
   margin-top: 10%;
 }
