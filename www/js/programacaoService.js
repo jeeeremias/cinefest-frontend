@@ -1,7 +1,7 @@
 function getProgramacao() {
   this.primeiroDia = [
     {nome_atividade: 'Mostra Um Minuto  1', hora: '20:00 - '},
-    {titulo: 'VII', genero: 'Ficção', tempo: '1m59', cidade: 'Pilar do Sul', estado: 'SP'},
+    {titulo: 'VII - ', genero: 'Ficção -  ', tempo: '1m59', cidade: 'Pilar do Sul', estado: 'SP'},
     {nome_atividade: 'Mostra Paralela', hora: '20:00 - '},
     {titulo: 'Kidchup - ', genero: 'Animação - ', tempo: '2m54', cidade: 'São Paulo', estado: 'SP'},
     {titulo: 'Procura-se - ', genero: 'Ficção - ', tempo: '12m35', cidade: 'Santos', estado: 'SP'},
@@ -12,9 +12,9 @@ function getProgramacao() {
     {titulo: 'Canhain! Uma Aventura Sinistra - ', genero: 'Ficção - ', tempo: '20min', cidade: 'Cuiabá'}
   ]
   this.segundoDia = [
-    {nome_atividade: 'Mostra Um Minuto 2 - ', hora: '20:00 - '},
+    {nome_atividade: 'Mostra Um Minuto 2 ', hora: '20:00 - '},
     {titulo: 'Síria - ', genero: 'Ficção - ', tempo: '1min', cidade: 'Votorantim', estado: 'SP'},
-    {nome_atividade: 'Mostra Paralela - ', hora: '20:00 - '},
+    {nome_atividade: 'Mostra Paralela', hora: '20:00 - '},
     {titulo: 'Kidchup - ', genero: 'Animação - ', tempo: '2m24', cidade: 'São Paulo', estado: 'SP'},
     {titulo: 'Procura-se - ', genero: 'Ficção - ', tempo: '12m35', cidade: 'Santos', estado: 'SP'},
     {titulo: 'Abraço de urso - ', genero: 'Animação - ', tempo: '5min', cidade: 'Curitiba', estado: 'PR'},

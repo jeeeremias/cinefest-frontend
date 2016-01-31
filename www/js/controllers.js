@@ -113,28 +113,98 @@ app.controller('MenuCtrl', function ($scope, $http, $state, $q, $ionicLoading, $
     $scope.tapiocas = new getTapiocas().tapiocas;
   })
   .controller('progracaoCtrl', function ($scope, $timeout) {
-    $scope.programacao = new getProgramacao().primeiroDia;
-
     $scope.dia = 15;
 
-    $scope.desabilitar_proximo = false;
+    $scope.mes = "/02";
+    $scope.diaSemana = 'Segunda-Feira';
+    $scope.programacao = new getProgramacao().primeiroDia;
 
-    if ($scope.dia == 16) {
-      $scope.desabilitar_anterior = true;
-    }
+    $scope.$watch("dia", function(){
 
-    $timeout(function () {
+      switch ($scope.dia) {
+        case 15:
+          console.log('dia 15');
+          $scope.diaSemana = 'Segunda-Feira';
+          atualizarView(new getProgramacao().primeiroDia);
+          break;
+        case 16:
+          console.log('dia 16');
+          $scope.diaSemana = 'Terça-Feira';
+          atualizarView(new getProgramacao().segundoDia);
+          break;
+        case 17:
+          console.log('dia 17');
+          $scope.diaSemana = 'Quarta-Feira';
+          atualizarView(new getProgramacao().terceiroDia);
+          break;
+        case 18:
+          console.log('dia 18');
+          $scope.diaSemana = 'Quinta-Feira';
+          atualizarView(new getProgramacao().quartoDia);
+          break;
+        case 19:
+          console.log('dia 19');
+          $scope.diaSemana = 'Sexta-Feira';
+          atualizarView(new getProgramacao().quintoDia);
+          break;
+        case 20:
+          console.log('dia 20');
+          $scope.diaSemana = 'Sábado';
+          atualizarView(new getProgramacao().sextoDia);
+          break;
+        case 21:
+          console.log('dia 21');
+          $scope.diaSemana = 'Domingo';
+          atualizarView(new getProgramacao().setimoDia);
+          break;
+        case 22:
+          console.log('dia 22');
+          $scope.diaSemana = 'Segunda-Feira';
+          atualizarView(new getProgramacao().oitavoDia);
+          break;
+        case 23:
+          console.log('dia 23');
+          $scope.diaSemana = 'Terça-Feira';
+          atualizarView(new getProgramacao().nonoDia);
+          break;
+        case 24:
+          console.log('dia 24');
+          $scope.diaSemana = 'Quarta-Feira';
+          atualizarView(new getProgramacao().decimoDia);
+          break;
+        case 25:
+          console.log('dia 25');
+          $scope.diaSemana = 'Quinta-Feira';
+          atualizarView(new getProgramacao().decimopDia);
+          break;
+        case 26:
+          console.log('dia 26');
+          $scope.diaSemana = 'Sexta-Feira';
+          atualizarView(new getProgramacao().decimosDia);
+          break;
+        case 27:
+          console.log('dia 27');
+          $scope.diaSemana = 'Sábado';
+          atualizarView(new getProgramacao().decimotDia);
+          break;
+      }
+    });
 
-    }, 1000);
-
+    atualizarView = function (valor) {
+      $timeout(function () {
+        $scope.$apply(function () {
+          $scope.programacao = valor;
+        })});
+    };
 
     $scope.proximo = function () {
       $scope.dia ++;
     };
     $scope.anterior = function () {
-      $scope.dia--;
+      $scope.dia --;
     };
   });
+
 var compareTo = function () {
   return {
     require: "ngModel", scope: {

@@ -7,10 +7,10 @@
   </h1>
 </ion-header-bar>
 <div class="bar bar-subheader bar-stable" ng-controller="progracaoCtrl">
-  <i class="button button-clear ion-chevron-left" ng-click="anterior()" ng-disabled="desabilitar_anterior" style="color:#E5E6E9;"></i>
+  <i class="button button-clear ion-chevron-left" ng-click="anterior()" ng-disabled="dia<=15" style="color:#E5E6E9;"></i>
 
-  <h2 class="title" style="color:#E5E6E9;">{{dia}} Dia da semana</h2>
-  <i class="button button-clear ion-chevron-right" ng-click="proximo()" ng-disabled="desabilitar_proximo" style="color: #E5E6E9;"> </i>
+  <h2 class="title" style="color:#E5E6E9;">{{dia}}{{mes}} - {{diaSemana}}</h2>
+  <i class="button button-clear ion-chevron-right" ng-click="proximo()" ng-disabled="dia >=27" style="color: #E5E6E9;"> </i>
 </div>
 <ion-content class="background votacao has-header has-subheader programacao" ng-controller="progracaoCtrl">
   <div class="form_programacao" ng-repeat="programacao in programacao">
@@ -18,4 +18,3 @@
     <p>{{programacao.titulo}} {{programacao.genero}} {{programacao.tempo}}</p>
   </div>
 </ion-content>
-
