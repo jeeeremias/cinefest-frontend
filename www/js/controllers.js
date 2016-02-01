@@ -33,27 +33,16 @@ app.controller('filmeCtrl', function ($scope, $http, $ionicLoading, $cordovaToas
     });
   };
 
-  $scope.nome = function (idFilme) {
-    sharedProperties.setProperty(idFilme);
-    console.log('id passado' + idFilme);
-    $state.go('detalhe_filme');
+  $scope.detalhe = function (filme) {
+    $state.go('detalhe_filme', {filme: filme});
   };
   $scope.goBack = function () {
     $ionicHistory.goBack();
   }
 });
 
-app.controller('detalhesCtrl', function ($scope, $http, sharedProperties) {
-  $scope.id = {id: sharedProperties.getProperty()};
-  $http({
-    url: endpoint + '/filme',
-    method: "GET",
-    params: $scope.id
-  }).then(function (result) {
-    console.log(result.data);
-  }, function (error) {
-    console.log('erro' + error.data.error);
-  });
+app.controller('detalhesCtrl', function ($scope, $http, $state) {
+  $scope.filme = $state.params.filme;
 });
 app.controller('MenuCtrl', function ($scope, $http, $state, $q, $ionicLoading, $ionicPopup, $ionicNavBarDelegate, UserService) {
     $scope.go = function (pagina) {
@@ -104,13 +93,63 @@ app.controller('MenuCtrl', function ($scope, $http, $state, $q, $ionicLoading, $
       }
     }
   })
-  .controller('cardapioCtrl', function ($scope) {
+  .controller('cardapioCtrl', function ($scope, $timeout, $ionicLoading) {
+    $scope.cardapio = 0;
+    $scope.proximo = function () {
+      $scope.cardapio ++;
+    };
+    $scope.anterior = function () {
+      $scope.cardapio --;
+    };
+    $scope.nome = [
+    'LANCHES',
+    'MASSAS',
+    'DOCES',
+    'EMPADAS',
+    'TAPIOCAS'
+    ];
 
-    $scope.lanches = new getLanches().lanches;
-    $scope.massas = new getMassas().massas;
-    $scope.doces = new getDoces().doces;
-    $scope.empadas = new getEmpadas().empadas;
-    $scope.tapiocas = new getTapiocas().tapiocas;
+    $scope.show = function() {
+    $ionicLoading.show({
+      template: 'Carregando...'
+    });
+  };
+  $scope.hide = function(){
+    $ionicLoading.hide();
+  };
+
+    $scope.$watch("cardapio", function(){
+
+      switch ($scope.cardapio) {
+        case 0:
+          atualizarView(new getLanches().lanches, 'img/cardapio/lanches.png');
+          break;
+        case 1:
+          $scope.show()
+          atualizarView(new getMassas().massas, 'img/cardapio/massa.png');
+          $scope.hide();
+          break;
+        case 2:
+          atualizarView(new getDoces().doces, 'img/cardapio/doce.png');
+          break;
+        case 3:
+          atualizarView(new getEmpadas().empadas, 'img/cardapio/empada.png');
+          break;
+        case 4:
+          atualizarView(new getTapiocas().tapiocas, 'img/cardapio/tapioca.png');
+          break;
+      }
+    });
+    atualizarView = function (valor, image) {
+      $scope.show();
+      $timeout(function () {
+        $scope.$apply(function () {
+          $scope.opcoes = valor;
+          $scope.imagem = image;
+        })
+        $scope.hide();
+      }, 1000);
+    };
   })
   .controller('progracaoCtrl', function ($scope, $timeout) {
     $scope.dia = 15;

@@ -10,11 +10,11 @@
   <i class="button button-clear ion-chevron-left" ng-click="anterior()" ng-disabled="dia<=15" style="color:#E5E6E9;"></i>
 
   <h2 class="title" style="color:#E5E6E9;">{{dia}}{{mes}} - {{diaSemana}}</h2>
-  <i class="button button-clear ion-chevron-right" ng-click="proximo()" ng-disabled="dia >=27" style="color: #E5E6E9;"> </i>
+  <i class="button button-clear ion-chevron-right" ng-click="proximo()" ng-disabled="dia >= 27" style="color: #E5E6E9;"> </i>
 </div>
 <ion-content class="background votacao has-header has-subheader programacao" ng-controller="progracaoCtrl">
   <div class="form_programacao" ng-repeat="programacao in programacao">
     <h4>{{programacao.hora }} {{programacao.nome_atividade}}</h4>
-    <p>{{programacao.titulo}} {{programacao.genero}} {{programacao.tempo}}</p>
+    <p ng-class="{'local-info': programacao.local}">{{programacao.titulo}} {{programacao.genero}} {{programacao.tempo}}</p>
   </div>
 </ion-content>

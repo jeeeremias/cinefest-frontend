@@ -6,8 +6,8 @@
 </ion-header-bar>
 <ion-content class="background lista_filmes" ng-controller="filmeCtrl">
   <ion-list>
-    <ion-item class="item item-thumbnail-left item-icon-right" ng-repeat="filme in lista track by $index" ng-click="nome(filme.idFilme)">
-      <img ng-src="http://rest-cinefest.rhcloud.com/imagem?id={{filme.imagens[0].resource}}">
+    <ion-item class="item item-thumbnail-left item-icon-right" ng-repeat="filme in lista track by $index" ng-click="detalhe(filme)">
+      <img ng-src="http://rest-cinefest.rhcloud.com/imagem?resource={{filme.imagens[0].resource}}">
       <h2>{{filme.nome}}</h2>
       <h2><p><b>{{filme.autor}}</b></p></h2>
       <div class="item-text-wrap">

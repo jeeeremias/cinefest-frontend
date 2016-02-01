@@ -81,8 +81,7 @@ body {
   width: 40%;
 }
 .img_menu_last_row{
-  width:35%;
-  margin-top: 30%;
+  width:20%;
 }
 
 .img_menu_logo {
@@ -90,6 +89,16 @@ body {
   height: auto;
   padding-top: 3%;
   padding-bottom: 5%;
+}
+
+.middle {
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.img_sobre_logo {
+  width: 50%;
+  height: auto;
 }
 .img_grid_content {
   position: absolute;
@@ -206,3 +215,7 @@ body {
   color: #e2c054;
 }
 
+.local-info {
+  font-weight: bold;
+  text-transform: uppercase;
+}

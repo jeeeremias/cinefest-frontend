@@ -45,6 +45,9 @@ var app = angular.module('cinefestApp', ['ionic', 'ngCordova', 'cinefestApp.cont
   })
     .state('detalhe_filme', {
       url: '/detalhe_filme',
+      params: {
+        filme: null
+      },
       templateUrl: 'templates/detalhe_filme.html'
     })
     .state('votacao', {

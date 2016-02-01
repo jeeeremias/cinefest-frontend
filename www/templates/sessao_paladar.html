@@ -4,31 +4,17 @@
   </div>
   <h1 class="title"><div class="bar_titulo">Sessão Paladar</div></h1>
 </ion-header-bar>
-<ion-content class="background sessao_paladar" scroll="true" ng-controller="cardapioCtrl">
+<div class="bar bar-subheader bar-stable" ng-controller="cardapioCtrl">
+  <i class="button button-clear ion-chevron-left" ng-click="anterior()" ng-disabled="cardapio <= 0" style="color:#E5E6E9;"></i>
+  <h2 class="title" style="color:#E5E6E9;">{{nome[cardapio]}}</h2>
+  <i class="button button-clear ion-chevron-right" ng-click="proximo()" ng-disabled="cardapio >= 4" style="color: #E5E6E9;"> </i>
+</div>
+<ion-content class="background has-header has-subheader sessao_paladar" scroll="true" ng-controller="cardapioCtrl">
+    <img ng-src="{{imagem}}"/>
   <ion-list>
-    <img ng-src="img/cardapio/lanches.png">
-    <ion-item class="item item-text-wrap" ng-repeat="lanche in lanches track by $index">
-      <h3>{{lanche.nome}}</h3>
-      <p>{{lanche.ingredientes}}</p>
-    </ion-item>
-    <img ng-src="img/cardapio/massa.png">
-    <ion-item class="item item-text-wrap" ng-repeat="massa in massas track by $index">
-      <h3>{{massa.nome}}</h3>
-      <p>{{massa.ingredientes}}</p>
-    </ion-item>
-    <img ng-src="img/cardapio/doce.png">
-    <ion-item class="item item-text-wrap" ng-repeat="doce in doces track by $index">
-      <h3>{{doce.nome}}</h3>
-    </ion-item>
-    <img ng-src="img/cardapio/empada.png">
-    <ion-item class="item item-text-wrap" ng-repeat="empada in empadas track by $index">
-      <h3>{{empada.nome}}</h3>
-      <p>{{empada.ingredientes}}</p>
-    </ion-item>
-    <img ng-src="img/cardapio/tapioca.png">
-    <ion-item class="item item-text-wrap" ng-repeat="tapioca in tapiocas track by $index">
-      <h3>{{tapioca.nome}}</h3>
-      <p>{{tapioca.ingredientes}}</p>
+    <ion-item class="item item-text-wrap" ng-repeat="opcao in opcoes track by $index">
+      <h3>{{opcao.nome}}</h3>
+      <p>{{opcao.ingredientes}}</p>
     </ion-item>
   </ion-list>
 </ion-content>
