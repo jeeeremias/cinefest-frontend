@@ -182,7 +182,7 @@ body {
 }
 .sessao_paladar img{
   width: 100%;
-  height: 50%;
+  height: auto;
 
 }
 .sessao_paladar p,h3{
