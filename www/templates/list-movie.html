@@ -1,0 +1,19 @@
+<ion-view view-title="Menu" hide-nav-bar="true" ng-controller="listMovieCtrl as movieCtrl">
+  <ion-content class="background lista_filmes">
+    <ion-list>
+      <ion-item class="item item-thumbnail-left item-icon-right background-theme" ng-repeat="movie in movieCtrl.movies track by $index" ng-click="detalhe(filme)">
+        <img ng-src="{{movieCtrl.imgLink + movie.imagens[0].resource}}">
+        <h2>{{movie.nome}}</h2>
+        <h2><p><b>{{movie.autor}}</b></p></h2>
+        <div class="item-text-wrap">
+          <p>{{movie.descricaoCurta}}</p>
+        </div>
+        <i class="icon ion-ios-arrow-right"></i>
+      </ion-item>
+    </ion-list>
+    <ion-infinite-scroll ng-if="!noMoreItemsAvailable"
+                         on-infinite="movieCtrl.loadMore()"
+                         distance="1%">
+    </ion-infinite-scroll>
+  </ion-content>
+</ion-view>

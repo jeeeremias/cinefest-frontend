@@ -1,4 +1,12 @@
 {
   "name": "CineFest",
-  "app_id": "f353483e"
+  "app_id": "f353483e",
+  "gulpStartupTasks": [
+    "sass",
+    "watch"
+  ],
+  "watchPatterns": [
+    "www/**/*",
+    "!www/lib/**/*"
+  ]
 }

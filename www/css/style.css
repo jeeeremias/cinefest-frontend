@@ -77,18 +77,24 @@ body {
 #text_data {
   margin-left: 2cm;
 }
-.img_menu {
-  width: 40%;
-}
+
 .img_menu_last_row{
   width:20%;
 }
 
-.img_menu_logo {
-  width: 60%;
-  height: auto;
-  padding-top: 3%;
-  padding-bottom: 5%;
+.logo-menu {
+  max-height: 200px;
+  max-width: 60%;
+  margin: auto;
+  padding-top: 10px;
+  padding-bottom: 20px;
+}
+
+.item_menu {
+  width: inherit;
+  margin: auto;
+  padding-left: 30px;
+  padding-right: 30px
 }
 
 .middle {
@@ -127,11 +133,8 @@ body {
   color: #f4f4f4;
 }
 
-/* fundo */
-.background, .background .pane, .background .item, .background .item-complex .item-content {
-  background-color: #1c2836;
-}
-.mmenu {
+.background-theme {
+  background-color: #001122;
   color: white;
 }
 

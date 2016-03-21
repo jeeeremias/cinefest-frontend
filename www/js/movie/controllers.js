@@ -1,98 +1,47 @@
-var app = angular.module('cinefestApp.controllers', []);
-var endpoint = 'http://rest-cinefest.rhcloud.com';
-//  var endpoint = 'http://localhost:8080';
+var movie = angular.module('cinefestApp.controllers')
 
-app.controller ('barCtrl', function ($scope, $ionicHistory) {
-  $scope.goBack = function () {
-    $ionicHistory.goBack();
+movie.controller('listMovieCtrl', function (movieService, $state, $scope, CONSTANTS) {
+  var vm = this
+  vm.$scope = $scope;
+  vm.imgLink = CONSTANTS.URL_IMAGE_LOCAL;
+  vm.requestListMovies = {pag: 0, tam: 5}
+  vm.movies = [];
+  vm.noMoreItemsAvailable = false;
+  vm.loadMore = function () {
+    console.log('test');
+    movieService.getFilmes(vm.requestListMovies)
+      .then(addFilmes, showError);
+      function addFilmes(response) {
+        if (response.data.length == 0) {
+          vm.$scope.noMoreItemsAvailable = true;
+        }
+        for (var i in response.data) {
+          vm.movies.push(response.data[i]);
+        }
+        vm.$scope.$broadcast('scroll.infiniteScrollComplete');
+        vm.requestListMovies.pag++;
+      };
+      function showError(response) {
+        /// TODO:
+      };
   };
-});
+  vm.$scope.$on('$stateChangeSuccess', function() {
+    vm.loadMore();
+  });
 
-app.controller('filmeCtrl', function ($scope, $http, $ionicLoading, $cordovaToast, Filmes, Imagem, sharedProperties, $state) {
-  console.log('baixando filmes');
-  $scope.requestListFilmes = {pag: 0, tam: 5}
-  $scope.lista = [];
-  $scope.noMoreItemsAvailable = false;
-  $scope.loadMore = function () {
-    $http({
-      url: endpoint + '/filmes',
-      method: "GET",
-      params: $scope.requestListFilmes
-    }).then(function (result) {
-      if (result.data.length == 0) {
-        $scope.noMoreItemsAvailable = true;
-      }
-      for (var i in result.data) {
-        $scope.lista.push(result.data[i]);
-      }
-      console.log($scope.lista);
-      $scope.$broadcast('scroll.infiniteScrollComplete');
-      $scope.requestListFilmes.pag++;
-    }, function (error) {
-      $cordovaToast.showLongBottom(error.data.error);
-    });
-  };
-
-  $scope.detalhe = function (filme) {
+  this.detalhe = function (filme) {
     $state.go('detalhe_filme', {filme: filme});
   };
-  $scope.goBack = function () {
+  this.goBack = function () {
     $ionicHistory.goBack();
   }
 });
 
-app.controller('detalhesCtrl', function ($scope, $http, $state) {
+movie.controller('detalhesCtrl', function ($scope, $http, $state) {
   $scope.filme = $state.params.filme;
 });
-app.controller('MenuCtrl', function ($scope, $http, $state, $q, $ionicLoading, $ionicPopup, $ionicNavBarDelegate, UserService) {
-    $scope.go = function (pagina) {
-      $state.go(pagina);
-    }
-  })
 
-  .controller('RegisterCtrl', function ($scope, $http, $state, $cordovaToast) {
-
-    $scope.usuario = {};
-
-    $scope.submitCadastro = function () {
-      $http({
-        url: endpoint + '/cadastro',
-        method: "POST",
-        data: $scope.usuario
-      }).then(function (result) {
-        if (result.data.sucesso) {
-          console.log(result.data.mensagem);
-          $state.go('login');
-        } else {
-          $cordovaToast.showLongBottom(result.data.mensagem);
-        }
-      }, function (error) {
-        $cordovaToast.showLongBottom(error.data.error);
-      });
-    }
-  })
-  .controller('votoCtrl', function ($scope, $http) {
-    $scope.lista = [];
-    $scope.requestListFilmes = {pag: 0, tam: 10}
-    $http({
-      url: endpoint + '/filmes',
-      method: 'GET',
-      params: $scope.requestListFilmes
-    }).then(function (result) {
-      console.log(result.data);
-      $scope.lista = result.data;
-    }), function (error) {
-      console.log('erro' + error.data.error);
-    }
-
-    $scope.voto = {};
-    $scope.submitForm = function () {
-      $scope.submitted = true;
-      if ($scope.submitted == true) {
-        console.log("Clicou no botão confirmar");
-      }
-    }
-  })
+/*
   .controller('cardapioCtrl', function ($scope, $timeout, $ionicLoading) {
     $scope.cardapio = 0;
     $scope.proximo = function () {
@@ -259,4 +208,4 @@ var compareTo = function () {
     }
   };
 };
-app.directive("compareTo", compareTo);
+movie.directive("compareTo", compareTo);*/

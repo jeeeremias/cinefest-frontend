@@ -1,39 +1,35 @@
-
-<ion-view view-title="" hide-back-button="true" hide-nav-bar="true">
-  <ion-content ng-controller="MenuCtrl" padding="true" scroll="false" class="background mmenu">
-    <div class = "row">
-      <div class = "col text-center">
-        <img src="img/assets/img_logo.png" class="img_menu_logo"></div>
-      </div>
+<ion-view view-title="Menu" hide-nav-bar="true">
+  <ion-content ng-controller="menuCtrl as menu" padding="true" class="background-theme mmenu">
+    <div class="row">
+      <img src="img/assets/img_logo.png" class="logo-menu"></div>
     </div>
-    <div class = "row">
-      <div class = "col text-center">
-        <img src="img/assets/img_filmes.png" class="img_menu" ng-click=go('lista_filmes')>
-        <br/>
+    <div class="row">
+      <div class="col col-50 text-center">
+        <img src="img/assets/img_filmes.png" class="item_menu" ng-click="menu.go('list_movie')">
         Filmes
       </div>
-      <div class = "col text-center">
-        <img src="img/assets/img_programacao.png" class="img_menu" ng-click=go('programacao')>
-        <br/>
+      <div class="col col-50 text-center">
+        <img src="img/assets/img_programacao.png" class="item_menu" ng-click="go('programacao')">
         Programação
       </div>
     </div>
-    <div class = "row" style="padding-top: 5%">
-      <div class = "col text-center">
-        <img src="img/assets/img_sessao_paladar.png" class="img_menu" ng-click=go('sessao_paladar')>
-        <br/>
+    <div class="row">
+      <div class="col col-50 text-center">
+        <img src="img/assets/img_sessao_paladar.png" class="item_menu" ng-click="go('sessao_paladar')">
         Sessão Paladar
       </div>
-      <div class = "col text-center">
-        <img src="img/assets/img_facebook.png" class="img_menu" onclick="window.open('fb://facewebmodal/f?href=https://www.facebook.com/cinefestvoto', '_system');">
-        <br/>
+      <div class="col col-50 text-center">
+        <img src="img/assets/img_facebook.png" class="item_menu" onclick="window.open('fb://facewebmodal/f?href=https://www.facebook.com/cinefestvoto', '_system');">
         Facebook
       </div>
     </div>
-    <div class="row">
-      <div class="col text-center" >
-        <img src="img/assets/img_sobre.png" class="img_menu_last_row" ng-click=go('sobre')>
-        <br/>
+    <div class="row text-center">
+      <div class="col col-50 text-center" >
+        <img src="img/assets/img_votacao.png" class="item_menu" ng-click="">
+        Votação
+      </div>
+      <div class="col col-50 text-center" >
+        <img src="img/assets/img_sobre.png" class="item_menu" ng-click="go('sobre')">
         Sobre
       </div>
     </div>
